@@ -43,5 +43,7 @@ Suggests:
     vdiffr (>= 1.0.7)
 VignetteBuilder: knitr
 RoxygenNote: 7.3.3
-Remotes: Boehringer-Ingelheim/dv.manager@main
+Remotes: 
+    Boehringer-Ingelheim/dv.manager@main,
+    Boehringer-Ingelheim/dv.papo@main
 Config/testthat/edition: 3
