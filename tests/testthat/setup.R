@@ -19,7 +19,7 @@ test_communication_with_papo <- function(mod, data, trigger_input_id) {
     filtered_dataset = datasets,
     module_output = function() list(),
     module_names = list(papo = "Papo"),
-    utils = list(switch2mod = function(id) NULL),
+    utils = list(switch2mod = function(selected) NULL),
     dataset_metadata = list(name = shiny::reactive("dummy_dataset_name"))
   )
   
@@ -54,7 +54,7 @@ test_communication_with_papo <- function(mod, data, trigger_input_id) {
     
     trigger_subject_selection <- function(subject_id) {
       set_input_params <- append(
-        as.list(setNames(paste0("[{\"key\":\"", subject_id, "\"}]"), trigger_input_id)),
+        as.list(setNames(subject_id, trigger_input_id)),
         list(allow_no_input_binding_ = TRUE, priority_ = "event")
       )
       do.call(app$set_inputs, set_input_params)

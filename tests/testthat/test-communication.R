@@ -9,5 +9,5 @@ mod <- dv.spiderplot::mod_spiderplot(
   receiver_id = "papo"
 )
 
-trigger_input_id <- "ggiraph_click-mod-plot"
+trigger_input_id <- "mod-girafe_selected"
 test_communication_with_papo(mod, data_list, trigger_input_id)
