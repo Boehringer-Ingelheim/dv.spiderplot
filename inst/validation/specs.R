@@ -20,5 +20,8 @@ specs_list(
   spiderplot_reference_lines_non_interactive = 
     "spiderplot with reference lines returns ggplot when interactive_plot=FALSE",
   spiderplot_title_subtitle_non_interactive = 
-    "spiderplot with title and subtitle returns ggplot when interactive_plot=FALSE"
+    "spiderplot with title and subtitle returns ggplot when interactive_plot=FALSE",
+  framework_specs = specs_list(
+    jumping_feature = "The module allows to drill-down by jumping to the Patient Profile module."
+  )
 )
