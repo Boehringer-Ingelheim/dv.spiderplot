@@ -6,7 +6,7 @@
 \usage{
 spiderplot_server(
   id,
-  dataset,
+  datasets,
   subjid_var,
   x_vars,
   y_vars,
@@ -25,8 +25,8 @@ spiderplot_server(
 \item{id}{`[character(1)]`. 
 Unique identifier for the module server.}
 
-\item{dataset}{`[character(1)]`. 
-Dataset containing the analysis results.}
+\item{datasets}{`[list(2)]`. 
+A list containing subject level and analysis results datasets.}
 
 \item{subjid_var}{`[character(1)]`. 
 Variable name for subject identifier. (e.g., "USUBJID").}

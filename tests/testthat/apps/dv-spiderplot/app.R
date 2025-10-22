@@ -12,6 +12,7 @@ attr(adtr[["AVISIT"]], "label") <- "Analysis Visit"
 
 spiderplot_mod <- dv.spiderplot::mod_spiderplot(
   module_id = "mod_spider",
+  subject_level_dataset_name = "adsl",
   results_dataset_name = "adtr",
   subjid_var = "USUBJID",
   x_vars = c("ADY", "AVISIT"),

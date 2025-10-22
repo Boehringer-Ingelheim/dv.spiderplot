@@ -6,6 +6,7 @@ dv.manager::run_app(
   module_list = list(
     "Spider Plot" = dv.spiderplot::mod_spiderplot(
       module_id = "mod1",
+      subject_level_dataset_name = "adsl",
       results_dataset_name = "adtr",
       subjid_var = "USUBJID",
       x_vars = c("AVISIT", "ADY"),

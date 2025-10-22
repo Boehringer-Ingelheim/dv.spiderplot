@@ -7,11 +7,10 @@
 #' @export
 mock_spiderplot_mm <- function() {  
   test_data <- generate_test_data()
-  adtr <- test_data$adtr
-  adsl <- test_data$adsl
   
   spiderplot_mod <- mod_spiderplot(
     module_id = "mock_spiderplot",
+    subject_level_dataset_name = "adsl",
     results_dataset_name = "adtr",
     subjid_var = "USUBJID",
     x_vars = c("AVISIT", "ADY"),
@@ -31,12 +30,11 @@ mock_spiderplot_mm <- function() {
   )
   
   dv.manager::run_app(
-    data = list("Mock Demo" = list(adsl = adsl, adtr = adtr)), 
+    data = list("Mock Demo" = test_data), 
     module_list = list("Spider Plot" = spiderplot_mod),
     title = "Mock Spider Plot Application",
     filter_data = "adsl",
-    filter_key = "USUBJID",
-    filter_type = "datasets"
+    filter_key = "USUBJID"
   )
 }
 

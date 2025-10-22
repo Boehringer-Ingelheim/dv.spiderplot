@@ -130,8 +130,8 @@ spiderplot_UI <- function( # nolint
 #'
 #' @param id `[character(1)]`. 
 #' Unique identifier for the module server. 
-#' @param dataset `[character(1)]`. 
-#' Dataset containing the analysis results.
+#' @param datasets `[list(2)]`. 
+#' A list containing subject level and analysis results datasets.
 #' @param switch_func `[function | NULL]`. 
 #' Function to switch to a different module when a patient is selected.
 #' @inheritParams mod_spiderplot
@@ -141,7 +141,7 @@ spiderplot_UI <- function( # nolint
 #' @export
 spiderplot_server <- function(
   id, 
-  dataset,
+  datasets,
   subjid_var,
   x_vars,
   y_vars,
@@ -157,7 +157,7 @@ spiderplot_server <- function(
 ) {
   module <- function(input, output, session) {
     dataset_validated <- shiny::reactive({
-      results_dataset <- dataset()
+      results_dataset <- datasets()[[2]]
       if (is.null(results_dataset) || nrow(results_dataset) == 0) {
         return(NULL)
       }
@@ -299,6 +299,8 @@ spiderplot_server <- function(
 #'
 #' @param module_id `[character(1)]`. 
 #' Unique identifier for the module. 
+#' @param subject_level_dataset_name `[character(1)]`. 
+#' Name of the dataset containing the subject level information (e.g., "adsl").
 #' @param results_dataset_name `[character(1)]`. 
 #' Name of the dataset containing the analysis results (e.g., "adtr").
 #' @param subjid_var `[character(1)]`. 
@@ -333,6 +335,7 @@ spiderplot_server <- function(
 #' @export
 mod_spiderplot <- function(
   module_id,
+  subject_level_dataset_name,
   results_dataset_name,
   subjid_var,
   x_vars, 
@@ -347,6 +350,7 @@ mod_spiderplot <- function(
   receiver_id = NULL
 ) {
   checkmate::assert_string(module_id, min.chars = 1)
+  checkmate::assert_string(subject_level_dataset_name, min.chars = 1)
   checkmate::assert_string(results_dataset_name, min.chars = 1)
   checkmate::assert_string(subjid_var, min.chars = 1)
   checkmate::assert_character(x_vars, min.len = 1, min.chars = 1)
@@ -372,10 +376,13 @@ mod_spiderplot <- function(
   server <- function(afmm) {
     spiderplot_server(
       id = module_id,
-      dataset = shiny::reactive({
+      datasets = shiny::reactive({
         filtered_datasets <- afmm[["filtered_dataset"]]()
-        checkmate::assert_subset(results_dataset_name, choices = names(filtered_datasets))
-        filtered_datasets[[results_dataset_name]]
+        checkmate::assert_subset(
+          c(subject_level_dataset_name, results_dataset_name), 
+          choices = names(filtered_datasets)
+        )
+        filtered_datasets[c(subject_level_dataset_name, results_dataset_name)]
       }),
       subjid_var = subjid_var,
       x_vars = x_vars,

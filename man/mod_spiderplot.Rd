@@ -6,6 +6,7 @@
 \usage{
 mod_spiderplot(
   module_id,
+  subject_level_dataset_name,
   results_dataset_name,
   subjid_var,
   x_vars,
@@ -23,6 +24,9 @@ mod_spiderplot(
 \arguments{
 \item{module_id}{`[character(1)]`. 
 Unique identifier for the module.}
+
+\item{subject_level_dataset_name}{`[character(1)]`. 
+Name of the dataset containing the subject level information (e.g., "adsl").}
 
 \item{results_dataset_name}{`[character(1)]`. 
 Name of the dataset containing the analysis results (e.g., "adtr").}
