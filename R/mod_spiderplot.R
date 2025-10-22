@@ -157,20 +157,39 @@ spiderplot_server <- function(
 ) {
   module <- function(input, output, session) {
     dataset_validated <- shiny::reactive({
+      subject_level_dataset <- datasets()[["subject_level"]]
       results_dataset <- datasets()[["results"]]
       if (is.null(results_dataset) || nrow(results_dataset) == 0) {
         return(NULL)
       }
-      
+
+      vars <- c(color_vars, facet_rows, facet_cols)
+      vars_to_add <- vars[!vars %in% names(results_dataset)]
+
+      if (length(vars_to_add) > 0) {
+        cols_to_join <- c(subjid_var, vars_to_add)
+        results_dataset <- dplyr::left_join(
+          x = results_dataset,
+          y = subject_level_dataset[, cols_to_join, drop = FALSE],
+          by = subjid_var
+        )
+      }
+
       col_names <- colnames(results_dataset)
       
       checkmate::assert_subset(subjid_var, choices = col_names)
       checkmate::assert_subset(x_vars, choices = col_names)
       checkmate::assert_subset(y_vars, choices = col_names)
-      checkmate::assert_subset(color_vars, choices = col_names)
-      checkmate::assert_subset(facet_rows, choices = col_names)
-      checkmate::assert_subset(facet_cols, choices = col_names)
-      
+      if (!is.null(color_vars)) {
+        checkmate::assert_subset(color_vars, choices = col_names)
+      }
+      if (!is.null(facet_rows)) {
+        checkmate::assert_subset(facet_rows, choices = col_names)
+      }
+      if (!is.null(facet_cols)) {
+        checkmate::assert_subset(facet_cols, choices = col_names)
+      }     
+
       return(results_dataset)
     })
     
