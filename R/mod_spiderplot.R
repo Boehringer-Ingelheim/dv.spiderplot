@@ -157,7 +157,7 @@ spiderplot_server <- function(
 ) {
   module <- function(input, output, session) {
     dataset_validated <- shiny::reactive({
-      results_dataset <- datasets()[[2]]
+      results_dataset <- datasets()[["results"]]
       if (is.null(results_dataset) || nrow(results_dataset) == 0) {
         return(NULL)
       }
@@ -382,7 +382,10 @@ mod_spiderplot <- function(
           c(subject_level_dataset_name, results_dataset_name), 
           choices = names(filtered_datasets)
         )
-        filtered_datasets[c(subject_level_dataset_name, results_dataset_name)]
+        list(
+          subject_level = filtered_datasets[[subject_level_dataset_name]],
+          results = filtered_datasets[[results_dataset_name]]
+        )
       }),
       subjid_var = subjid_var,
       x_vars = x_vars,
