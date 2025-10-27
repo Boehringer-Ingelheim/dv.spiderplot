@@ -251,7 +251,46 @@ spiderplot_server <- function(
       switch_func(selected = receiver_id)
     })
 
-    # Update selectize inputs with variable labels
+    shiny::onBookmark(function(state) {
+      state$values$x_var <- input[[POC$X_VAR_ID]]
+      state$values$y_var <- input[[POC$Y_VAR_ID]]
+      state$values$color_var <- input[[POC$COLOR_VAR_ID]]
+      state$values$facet_rows <- input[[POC$FACET_ROWS_ID]]
+      state$values$facet_cols <- input[[POC$FACET_COLS_ID]]
+    })
+    
+    shiny::onRestore(function(state) {
+      session$userData$is_restoring <- TRUE
+      session$userData$restored_values <- state$values
+      shiny::invalidateLater(100)
+    })
+    
+    update_variable <- function(input_id, base_choices, restored_var, is_multi = FALSE) {
+      choices <- base_choices
+      
+      if (!is.null(restored_var)) {
+        vars_to_add <- if (is_multi) restored_var else restored_var
+        for (var in vars_to_add) {
+          if (!var %in% choices && var %in% vars) {
+            var_name <- names(vars)[vars == var][1]
+            choices <- c(choices, setNames(var, var_name))
+          }
+        }
+      }
+      
+      is_restored_valid <- !is.null(restored_var) && 
+        if (is_multi) all(restored_var %in% choices) else restored_var %in% choices
+      
+      selected <- if (is_restored_valid) restored_var else choices[1]
+      
+      shiny::updateSelectizeInput(
+        session = session,
+        inputId = input_id,
+        choices = choices,
+        selected = selected
+      )
+    }
+
     shiny::observe({
       results_dataset <- dataset_validated()
       if (is.null(results_dataset)) {
@@ -260,47 +299,89 @@ spiderplot_server <- function(
       vars <- colnames(results_dataset)
       labels <- sapply(results_dataset, FUN = attr, "label")
       names(vars) <- paste0(vars, " [", labels, "]")
-   
-      shiny::updateSelectizeInput(
-        session = session,
-        inputId = POC$X_VAR_ID,
-        choices = vars[match(x_vars, vars)]
-      )
-
-      shiny::updateSelectizeInput(
-        session = session,
-        inputId = POC$Y_VAR_ID,
-        choices = vars[match(y_vars, vars)]
-      )
-
-      if (!is.null(color_vars)) {
-        color_vars_choices <- vars[match(color_vars, vars)]
+      
+      if (isTRUE(session$userData$is_restoring)) {
+        restored <- session$userData$restored_values
+        
+        update_variable(
+          input_id = POC$X_VAR_ID, 
+          base_choices = vars[match(x_vars, vars)], 
+          restored_var = restored$x_var
+        )
+        update_variable(
+          input_id = POC$Y_VAR_ID, 
+          base_choices = vars[match(y_vars, vars)], 
+          restored_var = restored$y_var
+        )
+        if (!is.null(color_vars)) {
+          update_variable(
+            input_id = POC$COLOR_VAR_ID, 
+            base_choices = vars[match(color_vars, vars)], 
+            restored_var = restored$color_var
+          )
+        }        
+        if (!is.null(facet_rows)) {
+          update_variable(
+            input_id = POC$FACET_ROWS_ID, 
+            base_choices = vars[match(facet_rows, vars)], 
+            restored_var = restored$facet_rows, 
+            is_multi = TRUE)
+        }
+        if (!is.null(facet_cols)) {
+          update_variable(
+            input_id = POC$FACET_COLS_ID, 
+            base_choices = vars[match(facet_cols, vars)], 
+            restored_var = restored$facet_cols, 
+            is_multi = TRUE
+          )
+        }
+        
+        session$userData$is_restoring <- FALSE
+        
+      } else {
+        x_choices <- vars[match(x_vars, vars)]
         shiny::updateSelectizeInput(
           session = session,
-          inputId = POC$COLOR_VAR_ID,
-          choices = color_vars_choices,
-          selected = color_vars_choices[1]
+          inputId = POC$X_VAR_ID,
+          choices = x_choices
         )
-      }
 
-      if (!is.null(facet_rows)) {
-        facet_rows_choices <- vars[match(facet_rows, vars)]
+        y_choices <- vars[match(y_vars, vars)]
         shiny::updateSelectizeInput(
           session = session,
-          inputId = POC$FACET_ROWS_ID,
-          choices = facet_rows_choices,
-          selected = facet_rows_choices[1]
+          inputId = POC$Y_VAR_ID,
+          choices = y_choices
         )
-      }
 
-      if (!is.null(facet_cols)) {
-        facet_cols_choices <- vars[match(facet_cols, vars)]
-        shiny::updateSelectizeInput(
-          session = session,
-          inputId = POC$FACET_COLS_ID,
-          choices = facet_cols_choices,
-          selected = facet_cols_choices[1]
-        )
+        if (!is.null(color_vars)) {
+          color_vars_choices <- vars[match(color_vars, vars)]
+          shiny::updateSelectizeInput(
+            session = session,
+            inputId = POC$COLOR_VAR_ID,
+            choices = color_vars_choices,
+            selected = color_vars_choices[1]
+          )
+        }
+        
+        if (!is.null(facet_rows)) {
+          facet_rows_choices <- vars[match(facet_rows, vars)]
+          shiny::updateSelectizeInput(
+            session = session,
+            inputId = POC$FACET_ROWS_ID,
+            choices = facet_rows_choices,
+            selected = facet_rows_choices[1]
+          )
+        }
+        
+        if (!is.null(facet_cols)) {
+          facet_cols_choices <- vars[match(facet_cols, vars)]
+          shiny::updateSelectizeInput(
+            session = session,
+            inputId = POC$FACET_COLS_ID,
+            choices = facet_cols_choices,
+            selected = facet_cols_choices[1]
+          )
+        }
       }
     })
 
