@@ -167,27 +167,32 @@ spiderplot_server <- function(
       vars_to_add <- vars[!vars %in% names(results_dataset)]
 
       if (length(vars_to_add) > 0) {
-        cols_to_join <- c(subjid_var, vars_to_add)
-        results_dataset <- dplyr::left_join(
-          x = results_dataset,
-          y = subject_level_dataset[, cols_to_join, drop = FALSE],
-          by = subjid_var
-        )
+        available_vars_to_add <- vars_to_add[vars_to_add %in% names(subject_level_dataset)]
+        
+        if (length(available_vars_to_add) > 0) {
+          cols_to_join <- c(subjid_var, available_vars_to_add)
+          results_dataset <- dplyr::left_join(
+            x = results_dataset,
+            y = subject_level_dataset[, cols_to_join, drop = FALSE],
+            by = subjid_var
+          )
+        }
       }
-
-      col_names <- colnames(results_dataset)
       
-      checkmate::assert_subset(subjid_var, choices = col_names)
-      checkmate::assert_subset(x_vars, choices = col_names)
-      checkmate::assert_subset(y_vars, choices = col_names)
+      results_dataset_colnames <- colnames(results_dataset)
+      subject_level_dataset_colnames <- colnames(subject_level_dataset)
+
+      checkmate::assert_subset(subjid_var, choices = results_dataset_colnames)
+      checkmate::assert_subset(x_vars, choices = results_dataset_colnames)
+      checkmate::assert_subset(y_vars, choices = results_dataset_colnames)
       if (!is.null(color_vars)) {
-        checkmate::assert_subset(color_vars, choices = col_names)
+        checkmate::assert_subset(color_vars, choices = subject_level_dataset_colnames)
       }
       if (!is.null(facet_rows)) {
-        checkmate::assert_subset(facet_rows, choices = col_names)
+        checkmate::assert_subset(facet_rows, choices = subject_level_dataset_colnames)
       }
       if (!is.null(facet_cols)) {
-        checkmate::assert_subset(facet_cols, choices = col_names)
+        checkmate::assert_subset(facet_cols, choices = subject_level_dataset_colnames)
       }     
 
       return(results_dataset)
@@ -504,6 +509,6 @@ mod_spiderplot <- function(
 
   dataset_names <- c(subject_level_dataset_name, results_dataset_name)
   meta <- list(dataset_info = list(all = dataset_names))
-  
+
   list(ui = ui, server = server, module_id = module_id, meta = meta)
 }
