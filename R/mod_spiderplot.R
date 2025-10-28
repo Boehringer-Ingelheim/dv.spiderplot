@@ -502,5 +502,8 @@ mod_spiderplot <- function(
     )
   }
 
-  list(ui = ui, server = server, module_id = module_id)
+  dataset_names <- c(subject_level_dataset_name, results_dataset_name)
+  meta <- list(dataset_info = list(all = dataset_names))
+  
+  list(ui = ui, server = server, module_id = module_id, meta = meta)
 }
