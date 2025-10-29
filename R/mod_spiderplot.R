@@ -278,7 +278,7 @@ spiderplot_server <- function(
         for (var in vars_to_add) {
           if (!var %in% choices && var %in% vars) {
             var_name <- names(vars)[vars == var][1]
-            choices <- c(choices, setNames(var, var_name))
+            choices <- c(choices, stats::setNames(var, var_name))
           }
         }
       }
