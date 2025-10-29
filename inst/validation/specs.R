@@ -22,6 +22,7 @@ specs_list(
   spiderplot_title_subtitle_non_interactive = 
     "spiderplot with title and subtitle returns ggplot when interactive_plot=FALSE",
   framework_specs = specs_list(
+    bookmarking = "The app's state gets restored correctly after bookmarking.",
     jumping_feature = "The module allows to drill-down by jumping to the Patient Profile module."
   )
 )
