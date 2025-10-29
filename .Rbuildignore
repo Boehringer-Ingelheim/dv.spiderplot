@@ -11,4 +11,4 @@ workflows.md
 _local/
 docs/
 shiny_bookmarks/
-.lint.R
+.lintr.R
