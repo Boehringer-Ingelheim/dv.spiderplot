@@ -42,7 +42,7 @@ Suggests:
     testthat (>= 3.2.1),
     vdiffr (>= 1.0.7)
 VignetteBuilder: knitr
-RoxygenNote: 7.3.3
+RoxygenNote: 7.3.2
 Remotes: 
     Boehringer-Ingelheim/dv.manager@main,
     Boehringer-Ingelheim/dv.papo@main
