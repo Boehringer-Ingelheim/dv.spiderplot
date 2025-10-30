@@ -16,6 +16,8 @@ mod_spiderplot(
   tooltip = NULL,
   facet_rows = NULL,
   facet_cols = NULL,
+  height_default = NULL,
+  height_range = NULL,
   title = NULL,
   subtitle = NULL,
   receiver_id = NULL
@@ -60,6 +62,12 @@ Variable names for row faceting. (Splitting plot into subplots by rows)}
 
 \item{facet_cols}{`[character(1+) | NULL]`. 
 Variable names for column faceting. (Splitting plot into subplots by columns)}
+
+\item{height_default}{`[numeric(1) | NULL]`.
+Default plot height in inches. If NULL, defaults to 5 inches.}
+
+\item{height_range}{`[numeric(2) | NULL]`.
+Range of allowable plot heights in inches. If NULL, defaults to c(1, height_default * 2).}
 
 \item{title}{`[character(1) | NULL]`. 
 Main plot title.}

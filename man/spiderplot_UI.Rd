@@ -4,7 +4,14 @@
 \alias{spiderplot_UI}
 \title{Spider Plot Module UI}
 \usage{
-spiderplot_UI(id, show_color_vars, show_facet_rows, show_facet_cols)
+spiderplot_UI(
+  id,
+  show_color_vars,
+  show_facet_rows,
+  show_facet_cols,
+  height_default = NULL,
+  height_range = NULL
+)
 }
 \arguments{
 \item{id}{`[character(1)]`. 
@@ -18,6 +25,12 @@ Whether to show the facet rows selection.}
 
 \item{show_facet_cols}{`[logical(1)]`. 
 Whether to show the facet columns selection.}
+
+\item{height_default}{`[numeric(1) | NULL]`.
+Default plot height in inches. If NULL, defaults to 5 inches.}
+
+\item{height_range}{`[numeric(2) | NULL]`.
+Range of allowable plot heights in inches. If NULL, defaults to c(1, height_default * 2).}
 }
 \description{
 Spider Plot Module UI

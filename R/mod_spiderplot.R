@@ -34,15 +34,26 @@ POC <- pack_of_constants( # nolint
 #' Whether to show the facet rows selection.
 #' @param show_facet_cols `[logical(1)]`. 
 #' Whether to show the facet columns selection.
+#' @inheritParams mod_spiderplot
 #' 
 #' @export
 spiderplot_UI <- function( # nolint
   id,
   show_color_vars,
   show_facet_rows,
-  show_facet_cols
+  show_facet_cols,
+  height_default = NULL,
+  height_range = NULL
 ) {
   ns <- shiny::NS(namespace = id)
+
+  if (is.null(height_default)) height_default <- POC$HEIGHT_SVG
+  if (is.null(height_range)) {
+    height_range <- c(1, height_default * 2)
+  }
+  checkmate::assert_true(height_range[1] < height_range[2])
+  checkmate::assert_true(height_default >= height_range[1])
+  checkmate::assert_true(height_default <= height_range[2])
 
   drop_menu <- shinyWidgets::dropMenu(
     tag = shiny::actionButton(
@@ -108,13 +119,11 @@ spiderplot_UI <- function( # nolint
     shiny::sliderInput(
       inputId = ns(POC$HEIGHT_ID),
       label = POC$HEIGHT_LABEL,
-      min = 1,
-      max = POC$HEIGHT_SVG * 2,
-      value = POC$HEIGHT_SVG,
-      step = 0.5
+      min = height_range[1],
+      max = height_range[2],
+      value = height_default
     )
   )
-
   shiny::tagList(
     drop_menu,
     ggiraph::girafeOutput(
@@ -149,7 +158,7 @@ spiderplot_server <- function(
   color_palette = NULL,
   tooltip = NULL,
   facet_rows = NULL,
-  facet_cols = NULL,  
+  facet_cols = NULL,
   title = NULL,
   subtitle = NULL,
   switch_func = NULL,
@@ -430,6 +439,10 @@ spiderplot_server <- function(
 #' Variable names for row faceting. (Splitting plot into subplots by rows)
 #' @param facet_cols `[character(1+) | NULL]`. 
 #' Variable names for column faceting. (Splitting plot into subplots by columns)
+#' @param height_default `[numeric(1) | NULL]`.
+#' Default plot height in inches. If NULL, defaults to 5 inches.
+#' @param height_range `[numeric(2) | NULL]`.
+#' Range of allowable plot heights in inches. If NULL, defaults to c(1, height_default * 2).
 #' @param title `[character(1) | NULL]`. 
 #' Main plot title.
 #' @param subtitle `[character(1) | NULL]`. 
@@ -450,6 +463,8 @@ mod_spiderplot <- function(
   tooltip = NULL,
   facet_rows = NULL,
   facet_cols = NULL,
+  height_default = NULL,
+  height_range = NULL,
   title = NULL,
   subtitle = NULL,
   receiver_id = NULL
@@ -465,6 +480,8 @@ mod_spiderplot <- function(
   checkmate::assert_character(tooltip, min.len = 1, min.chars = 1, names = "named", null.ok = TRUE)
   checkmate::assert_character(facet_rows, min.len = 1, min.chars = 1, null.ok = TRUE)
   checkmate::assert_character(facet_cols, min.len = 1, min.chars = 1, null.ok = TRUE)
+  checkmate::assert_numeric(height_default, len = 1, lower = 1, null.ok = TRUE)
+  checkmate::assert_numeric(height_range, len = 2, lower = 1, null.ok = TRUE)
   checkmate::assert_string(title, min.chars = 1, null.ok = TRUE)
   checkmate::assert_string(subtitle, min.chars = 1, null.ok = TRUE)
   checkmate::assert_string(receiver_id, min.chars = 1, null.ok = TRUE)
@@ -474,7 +491,9 @@ mod_spiderplot <- function(
       id = id,
       show_color_vars = !is.null(color_vars),
       show_facet_rows = !is.null(facet_rows),
-      show_facet_cols = !is.null(facet_cols)
+      show_facet_cols = !is.null(facet_cols),
+      height_default = height_default,
+      height_range = height_range
     )
   }
 
