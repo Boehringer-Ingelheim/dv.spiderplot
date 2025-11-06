@@ -1,4 +1,4 @@
-# dv.spiderplot 1.0.0-9000
+# dv.spiderplot 2.0.0
 
 - Complete reimplementation of the visualization engine
 - Migrated from plotly to ggplot2 and ggiraph for interactive visualization
