@@ -208,7 +208,10 @@ spiderplot_server <- function(
     })
     
     output[[POC$OUT_PLOT_ID]] <- ggiraph::renderGirafe({
-      results_dataset <- dataset_validated() 
+      results_dataset <- dataset_validated()
+      shiny::validate(
+        shiny::need(nrow(results_dataset) > 0, "No results to display.")
+      )      
       if (input[[POC$X_VAR_ID]] == "" || input[[POC$Y_VAR_ID]] == "") {
         return(NULL)
       }
