@@ -34,7 +34,6 @@ Imports:
     shinyWidgets (>= 0.8.1)
 Suggests:
     dv.manager (>= 2.2.0),
-    dv.papo (>= 2.1.1),
     forcats (>= 1.0.0),
     knitr (>= 1.45),
     pharmaverseadam (>= 0.2.0),
@@ -45,6 +44,5 @@ Suggests:
 VignetteBuilder: knitr
 RoxygenNote: 7.3.2
 Remotes: 
-    Boehringer-Ingelheim/dv.manager@main,
-    Boehringer-Ingelheim/dv.papo@main
+    Boehringer-Ingelheim/dv.manager@main
 Config/testthat/edition: 3
