@@ -1,0 +1,11 @@
+pandoc: '3.8'
+pkgdown: 2.1.2
+pkgdown_sha: ~
+articles:
+  communication: communication.html
+  dv-spiderplot: dv-spiderplot.html
+  qc: qc.html
+last_built: 2025-11-12T11:11Z
+urls:
+  reference: https://boehringer-ingelheim.github.io/dv.spiderplot/reference
+  article: https://boehringer-ingelheim.github.io/dv.spiderplot/articles
