@@ -1,0 +1,14 @@
+^dv.spiderplot\.Rproj$
+^\.Rproj\.user$
+^.*\.Rproj$
+^LICENSE\.md$
+^LICENSE$
+^\.github
+_pkgdown.yml
+workflows.md
+^.lintr$
+.gitempty
+_local/
+docs/
+shiny_bookmarks/
+.lintr.R
