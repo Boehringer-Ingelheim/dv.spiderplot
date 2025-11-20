@@ -109,12 +109,12 @@ spiderplot_UI <- function( # nolint
     shiny::textInput(
       inputId = ns(POC$HLINES_ID),
       label = POC$HLINES_LABEL,
-      placeholder = "e.g. -10, 10 (seperated by comma or space)", 
+      placeholder = "e.g. -10, 10 (separated by comma or space)", 
     ),
     shiny::textInput(
       inputId = ns(POC$VLINES_ID),
       label = POC$VLINES_LABEL,
-      placeholder = "e.g. 0, 10 (seperated by comma or space)",
+      placeholder = "e.g. 0, 10 (separated by comma or space)",
     ),
     shiny::sliderInput(
       inputId = ns(POC$HEIGHT_ID),
