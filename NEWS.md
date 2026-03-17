@@ -1,3 +1,6 @@
+# dv.spiderplot 2.0.0-9000
+- [NOT USER-FACING] Update communication with papo test snippet
+
 # dv.spiderplot 2.0.0
 
 - Complete reimplementation of the visualization engine
