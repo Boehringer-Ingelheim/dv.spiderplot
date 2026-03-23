@@ -10,7 +10,7 @@ vdoc <- local({
 specs <- vdoc[["specs"]]
 #  validation (F)
 
-# YT#VH0bf15c0db690dfd3fac713f3c9b61f66#VH00000000000000000000000000000000#
+# YT#VH981436c15c53edac3d551325ff4192c2#VH0bf15c0db690dfd3fac713f3c9b61f66#
 
 #' Test harness for communication with `dv.papo`.
 #'
