@@ -265,7 +265,7 @@ spiderplot_server <- function(
 
     # Switch to the receiver module when a subject is selected
     shiny::observeEvent(input[[POC$SUBJ_ID]], {
-      switch_func(selected = receiver_id)
+      switch_func(id = receiver_id)
     })
 
     shiny::onBookmark(function(state) {

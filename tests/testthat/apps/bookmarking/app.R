@@ -22,6 +22,5 @@ dv.manager::run_app(
   title = "Spider Plot Demo - Bookmarking Test",
   filter_data = "adsl",
   filter_key = "USUBJID",
-  filter_type = "datasets",
   enableBookmarking = "url"  # Enable bookmarking for testing
 )
