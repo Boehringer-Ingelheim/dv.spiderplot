@@ -1,4 +1,9 @@
+# dv.spiderplot 2.0.0-9001
+
+- Implement local filtering on a single variable
+
 # dv.spiderplot 2.0.0-9000
+
 - [NOT USER-FACING] Update communication with papo test snippet
 
 # dv.spiderplot 2.0.0
