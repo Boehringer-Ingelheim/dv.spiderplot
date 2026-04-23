@@ -1,13 +1,13 @@
 #' Mock Application for Spider Plot Module
 #'
 #' @description Creates a mock application demonstrating the spider plot module functionality.
-#' 
+#'
 #' @return Launches a Shiny application with the spider plot module
-#' 
+#'
 #' @export
-mock_spiderplot_mm <- function() {  
+mock_spiderplot_mm <- function() {
   test_data <- generate_test_data()
-  
+
   spiderplot_mod <- mod_spiderplot(
     module_id = "mock_spiderplot",
     subject_level_dataset_name = "adsl",
@@ -17,7 +17,7 @@ mock_spiderplot_mm <- function() {
     y_vars = c("PCHG"),
     color_vars = c("ARM", "SEX"),
     tooltip = c(
-      "Unique Subject ID: " = "USUBJID", 
+      "Unique Subject ID: " = "USUBJID",
       "Planned Arm: " = "ARM",
       "Sex: " = "SEX",
       "Age Group: " = "AGEGRP",
@@ -26,11 +26,12 @@ mock_spiderplot_mm <- function() {
     facet_rows = c("SEX", "COUNTRY"),
     facet_cols = c("ARM", "AGEGRP"),
     title = "Mock Spider Plot Demo",
-    subtitle = "Example with Test Data"
+    subtitle = "Example with Test Data",
+    filter_var = "ARM"
   )
-  
+
   dv.manager::run_app(
-    data = list("Mock Demo" = test_data), 
+    data = list("Mock Demo" = test_data),
     module_list = list("Spider Plot" = spiderplot_mod),
     title = "Mock Spider Plot Application",
     filter_data = "adsl",
@@ -40,12 +41,12 @@ mock_spiderplot_mm <- function() {
 
 
 #' Generate Test Data for Spider Plot Module
-#' 
+#'
 #' @param n_subjects `[integer(1)]`
 #' Number of subjects to generate (default: 10)
 #' @param seed `[integer(1) | NULL]`
 #' Random seed for reproducibility (default: NULL)
-#' 
+#'
 #' @keywords internal
 generate_test_data <- function(n_subjects = 10, seed = NULL) {
   set.seed(seed = seed)
@@ -64,14 +65,14 @@ generate_test_data <- function(n_subjects = 10, seed = NULL) {
   attr(adsl$SEX, "label") <- "Sex"
   attr(adsl$AGEGRP, "label") <- "Age Group"
   attr(adsl$COUNTRY, "label") <- "Country"
-  
+
   adtr <- data.frame(
     USUBJID = rep(subject_ids, each = 4),
     AVISIT = rep(c("BASELINE", "WEEK 3", "WEEK 6", "WEEK 9"), n_subjects),
     AVISITN = rep(0:3, n_subjects),
     ADY = rep(0:3 * 7 + 1, n_subjects)
   )
-  adtr$PCHG <- ifelse(adtr$AVISITN == 0, 0, 
+  adtr$PCHG <- ifelse(adtr$AVISITN == 0, 0,
     round(stats::runif(nrow(adtr), min = -0.5, max = 0.5) * 100, 2)
   )
   adtr <- dplyr::left_join(adtr, adsl, by = "USUBJID")
@@ -80,6 +81,6 @@ generate_test_data <- function(n_subjects = 10, seed = NULL) {
   attr(adtr$AVISITN, "label") <- "Analysis Visit Number"
   attr(adtr$ADY, "label") <- "Analysis Relative Day"
   attr(adtr$PCHG, "label") <- "Percent Change from Baseline"
-      
+
   list(adsl = adsl, adtr = adtr)
 }
