@@ -11,4 +11,5 @@ mod <- dv.spiderplot::mod_spiderplot(
 )
 
 trigger_input_id <- "mod-girafe_selected"
-test_communication_with_papo(mod, data_list, trigger_input_id)
+test_communication_with_papo(mod, data_list, trigger_input_id, 
+                             "framework_specs$jumping_feature", specs$framework_specs$jumping_feature)

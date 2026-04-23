@@ -10,7 +10,15 @@ vdoc <- local({
 specs <- vdoc[["specs"]]
 #  validation (F)
 
-test_communication_with_papo <- function(mod, data, trigger_input_id) {
+# YT#VH981436c15c53edac3d551325ff4192c2#VH0bf15c0db690dfd3fac713f3c9b61f66#
+
+#' Test harness for communication with `dv.papo`.
+#'
+#' @param mod Parameterized instance of the module to test. Should produce valid output and not trigger a `shiny::req`.
+#' @param data Data matching the previous parameterization.
+#' @param trigger_input_id Fully namespaced input ID that, when set to a subject ID value,
+#'                         should make the module send `dv.papo` a message.
+test_communication_with_papo <- function(mod, data, trigger_input_id, papo_spec_id, papo_spec_text) {
   datasets <- shiny::reactive(data)
   
   afmm <- list(
@@ -19,7 +27,7 @@ test_communication_with_papo <- function(mod, data, trigger_input_id) {
     filtered_dataset = datasets,
     module_output = function() list(),
     module_names = list(papo = "Papo"),
-    utils = list(switch2mod = function(selected) NULL),
+    utils = list(switch2mod = function(id) NULL),
     dataset_metadata = list(name = shiny::reactive("dummy_dataset_name"))
   )
   
@@ -41,9 +49,9 @@ test_communication_with_papo <- function(mod, data, trigger_input_id) {
   }
   
   app <- shiny::shinyApp(ui = app_ui, server = app_server)
-  
-  testthat::test_that("module adheres to send_subject_id_to_papo protocol" %>% 
-    vdoc[["add_spec"]](specs$framework_specs$jumping_feature), { 
+
+  testthat::test_that("module adheres to send_subject_id_to_papo protocol" |>
+    vdoc[["add_spec"]](papo_spec_text, papo_spec_id), {
     app <- shinytest2::AppDriver$new(app, name = "test_send_subject_id_to_papo_protocol")
                      
     app$wait_for_idle()

@@ -9,13 +9,32 @@ test_that("data filter functionality works as expected in the app", {
 
   app$wait_for_idle(duration = 1000)
   app$expect_screenshot()
-  
-  app$set_inputs(`global_filter-vars_open` = TRUE, allow_no_input_binding_ = TRUE)
-  app$set_inputs(`global_filter-vars` = "SEX")
-  app$set_inputs(`global_filter-vars_open` = FALSE, allow_no_input_binding_ = TRUE)
-  app$set_inputs(`global_filter-SEX_open` = TRUE, allow_no_input_binding_ = TRUE)  
-  app$set_inputs(`global_filter-SEX` = "M")
-  app$set_inputs(`global_filter-SEX_open` = FALSE, allow_no_input_binding_ = TRUE)
+
+  filter_json <- paste0(
+    '{',
+    '"filters":{',
+    '"datasets_filter":{"children":[]},',
+    '"subject_filter":{"children":[{',
+    '"kind":"row_operation",',
+    '"operation":"and",',
+    '"children":[{',
+    '"kind":"filter",',
+    '"dataset":"adsl",',
+    '"operation":"select_subset",',
+    '"variable":"SEX",',
+    '"values":["M"],',
+    '"include_NA":true',
+    '}]',
+    '}]}},',
+    '"dataset_list_name":"Demo"',
+    '}'
+  )
+
+  app$set_inputs(
+    `filter-filter_state_json_input` = filter_json,
+    allow_no_input_binding_ = TRUE,
+    priority_ = "event"
+  )
   app$wait_for_idle(duration = 1000)
   app$expect_screenshot()
 
