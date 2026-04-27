@@ -1,6 +1,7 @@
 # dv.spiderplot 2.0.0-9001
 
 - Implement local filtering on a single variable
+- Add scroll bar to drop-down menu
 
 # dv.spiderplot 2.0.0-9000
 

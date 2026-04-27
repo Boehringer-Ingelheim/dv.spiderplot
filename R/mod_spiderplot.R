@@ -60,6 +60,12 @@ spiderplot_UI <- function( # nolint
   checkmate::assert_true(height_default <= height_range[2])
 
   drop_menu <- shinyWidgets::dropMenu(
+    options = shinyWidgets::dropMenuOptions(
+      boundary = "window",
+      placement = "bottom-start",
+      offset = "4, 0",
+    ),
+    style = "max-height: 85vh; overflow-y: auto; overflow-x: hidden; padding: 10px;",
     tag = shiny::actionButton(
       inputId = ns(POC$PLOT_OPTIONS_ID),
       label = POC$PLOT_OPTIONS_LABEL,
