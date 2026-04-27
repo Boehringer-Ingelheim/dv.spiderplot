@@ -71,18 +71,72 @@ spiderplot_UI <- function( # nolint
       label = POC$PLOT_OPTIONS_LABEL,
       icon = shiny::icon("gear")
     ),
-    shiny::selectizeInput(
-      inputId = ns(POC$X_VAR_ID),
-      label = POC$X_VAR_LABEL,
-      choices = NULL,
-      multiple = FALSE
+    shiny::fluidRow(
+      shiny::column(
+        6,
+        shiny::div(
+          shiny::selectizeInput(
+            inputId = ns(POC$X_VAR_ID),
+            label = POC$X_VAR_LABEL,
+            choices = NULL,
+            multiple = FALSE
+          ),
+          shiny::textInput(
+            inputId = ns(POC$VLINES_ID),
+            label = POC$VLINES_LABEL,
+            placeholder = "e.g. 0, 10 (separated by comma or space)",
+          )
+        )
+      ),
+      shiny::column(
+        6,
+        shiny::div(
+          shiny::selectizeInput(
+            inputId = ns(POC$Y_VAR_ID),
+            label = POC$Y_VAR_LABEL,
+            choices = NULL,
+            multiple = FALSE
+          ),
+          shiny::textInput(
+            inputId = ns(POC$HLINES_ID),
+            label = POC$HLINES_LABEL,
+            placeholder = "e.g. -10, 10 (separated by comma or space)",
+          )
+        )
+      )
     ),
-    shiny::selectizeInput(
-      inputId = ns(POC$Y_VAR_ID),
-      label = POC$Y_VAR_LABEL,
-      choices = NULL,
-      multiple = FALSE
+    shiny::hr(style = "margin-top: 2px; margin-bottom: 10px;"),
+    shiny::fluidRow(
+      shiny::column(
+        6,
+        shiny::div(
+          if (show_facet_rows) {
+            shiny::selectizeInput(
+              inputId = ns(POC$FACET_ROWS_ID),
+              label = POC$FACET_ROWS_LABEL,
+              choices = NULL,
+              multiple = TRUE,
+              options = list(placeholder = "Select facet rows")
+            )
+          }
+        )
+      ),
+      shiny::column(
+        6,
+        shiny::div(
+          if (show_facet_cols) {
+            shiny::selectizeInput(
+              inputId = ns(POC$FACET_COLS_ID),
+              label = POC$FACET_COLS_LABEL,
+              choices = NULL,
+              multiple = TRUE,
+              options = list(placeholder = "Select facet columns")
+            )
+          }
+        )
+      )
     ),
+    shiny::hr(style = "margin-top: 5px; margin-bottom: 10px;"),
     if (show_color_vars) {
       shiny::selectizeInput(
         inputId = ns(POC$COLOR_VAR_ID),
@@ -98,41 +152,6 @@ spiderplot_UI <- function( # nolint
         )
       )
     },
-    if (show_facet_rows) {
-      shiny::selectizeInput(
-        inputId = ns(POC$FACET_ROWS_ID),
-        label = POC$FACET_ROWS_LABEL,
-        choices = NULL,
-        multiple = TRUE,
-        options = list(placeholder = "Select facet rows")
-      )
-    },
-    if (show_facet_cols) {
-      shiny::selectizeInput(
-        inputId = ns(POC$FACET_COLS_ID),
-        label = POC$FACET_COLS_LABEL,
-        choices = NULL,
-        multiple = TRUE,
-        options = list(placeholder = "Select facet columns")
-      )
-    },
-    shiny::textInput(
-      inputId = ns(POC$HLINES_ID),
-      label = POC$HLINES_LABEL,
-      placeholder = "e.g. -10, 10 (separated by comma or space)",
-    ),
-    shiny::textInput(
-      inputId = ns(POC$VLINES_ID),
-      label = POC$VLINES_LABEL,
-      placeholder = "e.g. 0, 10 (separated by comma or space)",
-    ),
-    shiny::sliderInput(
-      inputId = ns(POC$HEIGHT_ID),
-      label = POC$HEIGHT_LABEL,
-      min = height_range[1],
-      max = height_range[2],
-      value = height_default
-    ),
     if (!is.null(filter_var)) {
       shiny::selectInput(
         inputId = ns(POC$FILTER_ID),
@@ -141,8 +160,16 @@ spiderplot_UI <- function( # nolint
         selected = filter_default_vals,
         multiple = TRUE
       )
-    }
+    },
+    shiny::sliderInput(
+      inputId = ns(POC$HEIGHT_ID),
+      label = POC$HEIGHT_LABEL,
+      min = height_range[1],
+      max = height_range[2],
+      value = height_default
+    ),
   )
+
   shiny::tagList(
     drop_menu,
     ggiraph::girafeOutput(
