@@ -10,64 +10,77 @@ spiderplot_server(
   subjid_var,
   x_vars,
   y_vars,
-  color_vars,
+  color_vars = NULL,
   color_palette = NULL,
   tooltip = NULL,
   facet_rows = NULL,
   facet_cols = NULL,
   title = NULL,
   subtitle = NULL,
+  filter_var = NULL,
+  filter_values = NULL,
+  filter_default_vals = NULL,
   switch_func = NULL,
   receiver_id = NULL
 )
 }
 \arguments{
-\item{id}{`[character(1)]`. 
+\item{id}{\verb{[character(1)]}
 Unique identifier for the module server.}
 
-\item{datasets}{`[list(2)]`. 
+\item{datasets}{\verb{[list(2)]}
 A list containing subject level and analysis results datasets.}
 
-\item{subjid_var}{`[character(1)]`. 
+\item{subjid_var}{\verb{[character(1)]}
 Variable name for subject identifier. (e.g., "USUBJID").}
 
-\item{x_vars}{`[character(1+)]`. 
-A character vector of variable names for the x-axis. Each element must be a 
-valid column name in the results dataset. Supported types are numeric 
-(e.g. "ADY") and character/factor (e.g. "AVISIT"). When multiple variables are 
+\item{x_vars}{\verb{[character(1+)]}
+A character vector of variable names for the x-axis. Each element must be a
+valid column name in the results dataset. Supported types are numeric
+(e.g. "ADY") and character/factor (e.g. "AVISIT"). When multiple variables are
 supplied (e.g., c("ADY", "AVISIT")), the first element is used as default in the plot.}
 
-\item{y_vars}{`[character(1+)]`. 
-A character vector of variable names for the y-axis. Each element must be a 
-valid column name in the results dataset. Supported types are numeric 
+\item{y_vars}{\verb{[character(1+)]}
+A character vector of variable names for the y-axis. Each element must be a
+valid column name in the results dataset. Supported types are numeric
 (e.g. "PCHG", "CHG"). At least one valid variable is required.}
 
-\item{color_vars}{`[character(1+) | NULL]`. 
+\item{color_vars}{\verb{[character(1+) | NULL]}
 Variable name(s) for color grouping (e.g., treatment arm).}
 
-\item{color_palette}{`[named character(1+) | NULL]`. 
+\item{color_palette}{\verb{[named character(1+) | NULL]}
 Custom color palette mapping factor levels to (hex) colors.}
 
-\item{tooltip}{`[named character vector | NULL]`. 
+\item{tooltip}{\verb{[named character vector | NULL]}
 Named character vector specifying tooltip content. Names are labels, values are column names.
 If NULL, defaults to using the subject ID variable for tooltips.}
 
-\item{facet_rows}{`[character(1+) | NULL]`. 
+\item{facet_rows}{\verb{[character(1+) | NULL]}
 Variable names for row faceting. (Splitting plot into subplots by rows)}
 
-\item{facet_cols}{`[character(1+) | NULL]`. 
+\item{facet_cols}{\verb{[character(1+) | NULL]}
 Variable names for column faceting. (Splitting plot into subplots by columns)}
 
-\item{title}{`[character(1) | NULL]`. 
+\item{title}{\verb{[character(1) | NULL]}
 Main plot title.}
 
-\item{subtitle}{`[character(1) | NULL]`. 
+\item{subtitle}{\verb{[character(1) | NULL]}
 Plot subtitle for additional context.}
 
-\item{switch_func}{`[function | NULL]`. 
+\item{filter_var}{\verb{[character(1) | NULL]}
+Name of variable to use for local filtering. This variable must exist on the dataset specified
+by \code{subject_level_dataset_name} or \code{results_dataset_name}.}
+
+\item{filter_values}{\verb{[character(1+) | NULL]}
+Character vector restricting the available filter choices.}
+
+\item{filter_default_vals}{\verb{[character(1+) | NULL]}
+Default selected values for the filter variable upon initialization.}
+
+\item{switch_func}{\verb{[function | NULL]}
 Function to switch to a different module when a patient is selected.}
 
-\item{receiver_id}{`[character(1) | NULL]`. 
+\item{receiver_id}{\verb{[character(1) | NULL]}
 Module ID that will receive patient selection events from this module.}
 }
 \description{

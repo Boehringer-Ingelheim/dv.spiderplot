@@ -27,13 +27,13 @@ POC <- pack_of_constants( # nolint
 
 #' @title Spider Plot Module UI
 #'
-#' @param id `[character(1)]`.
+#' @param id `[character(1)]`
 #' Unique identifier for the module UI.
-#' @param show_color_vars `[logical(1)]`.
+#' @param show_color_vars `[logical(1)]`
 #' Whether to show the color variable selection.
-#' @param show_facet_rows `[logical(1)]`.
+#' @param show_facet_rows `[logical(1)]`
 #' Whether to show the facet rows selection.
-#' @param show_facet_cols `[logical(1)]`.
+#' @param show_facet_cols `[logical(1)]`
 #' Whether to show the facet columns selection.
 #' @inheritParams mod_spiderplot
 #'
@@ -183,11 +183,11 @@ spiderplot_UI <- function( # nolint
 
 #' @title Spider Plot Module Server
 #'
-#' @param id `[character(1)]`.
+#' @param id `[character(1)]`
 #' Unique identifier for the module server.
-#' @param datasets `[list(2)]`.
+#' @param datasets `[list(2)]`
 #' A list containing subject level and analysis results datasets.
-#' @param switch_func `[function | NULL]`.
+#' @param switch_func `[function | NULL]`
 #' Function to switch to a different module when a patient is selected.
 #' @inheritParams mod_spiderplot
 #'
@@ -514,46 +514,50 @@ spiderplot_server <- function(
 #' @description Creates an interactive spider plot module for visualizing
 #' individual patient trajectories over time in clinical trials.
 #'
-#' @param module_id `[character(1)]`.
+#' @param module_id `[character(1)]`
 #' Unique identifier for the module.
-#' @param subject_level_dataset_name `[character(1)]`.
+#' @param subject_level_dataset_name `[character(1)]`
 #' Name of the dataset containing the subject level information (e.g., "adsl").
-#' @param results_dataset_name `[character(1)]`.
+#' @param results_dataset_name `[character(1)]`
 #' Name of the dataset containing the analysis results (e.g., "adtr").
-#' @param subjid_var `[character(1)]`.
+#' @param subjid_var `[character(1)]`
 #' Variable name for subject identifier. (e.g., "USUBJID").
-#' @param x_vars `[character(1+)]`.
+#' @param x_vars `[character(1+)]`
 #' A character vector of variable names for the x-axis. Each element must be a
 #' valid column name in the results dataset. Supported types are numeric
 #' (e.g. "ADY") and character/factor (e.g. "AVISIT"). When multiple variables are
 #' supplied (e.g., c("ADY", "AVISIT")), the first element is used as default in the plot.
-#' @param y_vars `[character(1+)]`.
+#' @param y_vars `[character(1+)]`
 #' A character vector of variable names for the y-axis. Each element must be a
 #' valid column name in the results dataset. Supported types are numeric
 #' (e.g. "PCHG", "CHG"). At least one valid variable is required.
-#' @param color_vars `[character(1+) | NULL]`.
+#' @param color_vars `[character(1+) | NULL]`
 #' Variable name(s) for color grouping (e.g., treatment arm).
-#' @param color_palette `[named character(1+) | NULL]`.
+#' @param color_palette `[named character(1+) | NULL]`
 #' Custom color palette mapping factor levels to (hex) colors.
-#' @param tooltip `[named character vector | NULL]`.
+#' @param tooltip `[named character vector | NULL]`
 #' Named character vector specifying tooltip content. Names are labels, values are column names.
 #' If NULL, defaults to using the subject ID variable for tooltips.
-#' @param facet_rows `[character(1+) | NULL]`.
+#' @param facet_rows `[character(1+) | NULL]`
 #' Variable names for row faceting. (Splitting plot into subplots by rows)
-#' @param facet_cols `[character(1+) | NULL]`.
+#' @param facet_cols `[character(1+) | NULL]`
 #' Variable names for column faceting. (Splitting plot into subplots by columns)
-#' @param height_default `[numeric(1) | NULL]`.
+#' @param height_default `[numeric(1) | NULL]`
 #' Default plot height in inches. If NULL, defaults to 5 inches.
-#' @param height_range `[numeric(2) | NULL]`.
+#' @param height_range `[numeric(2) | NULL]`
 #' Range of allowable plot heights in inches. If NULL, defaults to c(1, height_default * 2).
-#' @param title `[character(1) | NULL]`.
+#' @param title `[character(1) | NULL]`
 #' Main plot title.
-#' @param subtitle `[character(1) | NULL]`.
+#' @param subtitle `[character(1) | NULL]`
 #' Plot subtitle for additional context.
-#' @param filter_var `[character(1) | NULL]` .
-#' @param filter_values `[character(1+) | NULL]` .
-#' @param filter_default_vals `[character(1+) | NULL]` .
-#' @param receiver_id `[character(1) | NULL]`.
+#' @param filter_var `[character(1) | NULL]`
+#' Name of variable to use for local filtering. This variable must exist on the dataset specified
+#' by `subject_level_dataset_name` or `results_dataset_name`.
+#' @param filter_values `[character(1+) | NULL]`
+#' Character vector restricting the available filter choices.
+#' @param filter_default_vals `[character(1+) | NULL]`
+#' Default selected values for the filter variable upon initialization.
+#' @param receiver_id `[character(1) | NULL]`
 #' Module ID that will receive patient selection events from this module.
 #'
 #' @export
