@@ -200,7 +200,7 @@ spiderplot_server <- function(
   subjid_var,
   x_vars,
   y_vars,
-  color_vars,
+  color_vars = NULL,
   color_palette = NULL,
   tooltip = NULL,
   facet_rows = NULL,
