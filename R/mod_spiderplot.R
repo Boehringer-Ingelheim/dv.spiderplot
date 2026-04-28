@@ -207,9 +207,9 @@ spiderplot_server <- function(
   facet_cols = NULL,
   title = NULL,
   subtitle = NULL,
-  filter_var,
-  filter_values,
-  filter_default_vals,
+  filter_var = NULL,
+  filter_values = NULL,
+  filter_default_vals = NULL,
   switch_func = NULL,
   receiver_id = NULL
 ) {
@@ -224,7 +224,7 @@ spiderplot_server <- function(
         return(NULL)
       }
 
-      vars <- c(color_vars, facet_rows, facet_cols)
+      vars <- c(color_vars, facet_rows, facet_cols, filter_var)
       vars_to_add <- vars[!vars %in% names(results_dataset)]
 
       if (length(vars_to_add) > 0) {
@@ -259,13 +259,18 @@ spiderplot_server <- function(
       return(results_dataset)
     })
 
-    output[[POC$OUT_PLOT_ID]] <- ggiraph::renderGirafe({
-
+    dataset_filtered <- shiny::reactive({
       results_dataset <- dataset_validated()
 
       if (filter_flag) {
         results_dataset <- results_dataset[results_dataset[[filter_var]] %in% input[[POC$FILTER_ID]], ]
       }
+
+      return(results_dataset)
+    })
+
+    output[[POC$OUT_PLOT_ID]] <- ggiraph::renderGirafe({
+      results_dataset <- dataset_filtered()
 
       shiny::validate(
         shiny::need(nrow(results_dataset) > 0, "No results to display.")

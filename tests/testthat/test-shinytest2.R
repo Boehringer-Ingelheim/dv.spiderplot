@@ -11,4 +11,5 @@ test_that("spiderplot app initializes with correct default input values", {
   expect_equal(app_values$input[["mod_spider-facet_rows"]], "SEX")
   expect_equal(app_values$input[["mod_spider-hlines"]], "")
   expect_equal(app_values$input[["mod_spider-vlines"]], "")
+  expect_equal(app_values$input[["mod_spider-filter"]], c("Placebo", "Xanomeline Low Dose", "Xanomeline High Dose"))
 })
