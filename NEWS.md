@@ -1,3 +1,6 @@
+# dv.spiderplot 2.0.0-9001
+- Add vignette on module customization
+
 # dv.spiderplot 2.0.0-9000
 - [NOT USER-FACING] Update communication with papo test snippet
 

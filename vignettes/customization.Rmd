@@ -60,6 +60,15 @@ spiderplot_mod <- mod_spiderplot(
 )
 ```
 
+```{r app, eval=FALSE}
+dv.manager::run_app(
+  data = list("Demo" = list(adsl = adsl, adtr = adtr)), 
+  module_list = list("Spider Plot" = spiderplot_mod),
+  title = "Spider Plot Demo",
+  filter_data = "adsl",
+  filter_key = "USUBJID"
+)
+```
 
 ## Color Grouping
 

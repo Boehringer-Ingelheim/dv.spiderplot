@@ -1,5 +1,5 @@
 ---
-title: "Getting Started with dv.spiderplot"
+title: "Spider Plot Module"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{dv-spiderplot}
@@ -13,6 +13,8 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 ```
+
+## Introduction
 
 The DaVinci Spider Plot Module is an interactive Shiny module designed for visualizing individual patient trajectories over time in clinical trials, particularly valuable for oncology efficacy analysis. This module creates spider plots that display patient-level response data, showing changes in tumor size or other clinical measurements across multiple visits.
 
