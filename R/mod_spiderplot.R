@@ -255,6 +255,10 @@ spiderplot_server <- function(
       if (!is.null(facet_cols)) {
         checkmate::assert_subset(facet_cols, choices = subject_level_dataset_colnames)
       }
+      if (filter_flag) {
+        checkmate::assert_subset(filter_var, choices = c(subject_level_dataset_colnames,
+                                                         results_dataset_colnames))
+      }
 
       return(results_dataset)
     })
