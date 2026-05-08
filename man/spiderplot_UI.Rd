@@ -10,27 +10,40 @@ spiderplot_UI(
   show_facet_rows,
   show_facet_cols,
   height_default = NULL,
-  height_range = NULL
+  height_range = NULL,
+  filter_var,
+  filter_values,
+  filter_default_vals
 )
 }
 \arguments{
-\item{id}{`[character(1)]`. 
+\item{id}{\verb{[character(1)]}
 Unique identifier for the module UI.}
 
-\item{show_color_vars}{`[logical(1)]`. 
+\item{show_color_vars}{\verb{[logical(1)]}
 Whether to show the color variable selection.}
 
-\item{show_facet_rows}{`[logical(1)]`. 
+\item{show_facet_rows}{\verb{[logical(1)]}
 Whether to show the facet rows selection.}
 
-\item{show_facet_cols}{`[logical(1)]`. 
+\item{show_facet_cols}{\verb{[logical(1)]}
 Whether to show the facet columns selection.}
 
-\item{height_default}{`[numeric(1) | NULL]`.
+\item{height_default}{\verb{[numeric(1) | NULL]}
 Default plot height in inches. If NULL, defaults to 5 inches.}
 
-\item{height_range}{`[numeric(2) | NULL]`.
+\item{height_range}{\verb{[numeric(2) | NULL]}
 Range of allowable plot heights in inches. If NULL, defaults to c(1, height_default * 2).}
+
+\item{filter_var}{\verb{[character(1) | NULL]}
+Name of variable to use for local filtering. This variable must exist on the dataset specified
+by \code{subject_level_dataset_name} or \code{results_dataset_name}.}
+
+\item{filter_values}{\verb{[character(1+) | NULL]}
+Character vector restricting the available filter choices.}
+
+\item{filter_default_vals}{\verb{[character(1+) | NULL]}
+Default selected values for the filter variable upon initialization.}
 }
 \description{
 Spider Plot Module UI

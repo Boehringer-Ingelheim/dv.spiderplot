@@ -70,7 +70,10 @@ spiderplot_mod <- dv.spiderplot::mod_spiderplot(
   facet_rows = c("SEX", "ETHNIC"),
   facet_cols = c("ARM", "AGEGR1"),
   title = "Interactive Spider Plot",
-  subtitle = "CDISC-PILOT-01"
+  subtitle = "CDISC-PILOT-01",
+  filter_var = "ARM",
+  filter_values = c("Placebo", "Xanomeline Low Dose", "Xanomeline High Dose"),
+  filter_default_vals = c("Xanomeline Low Dose", "Xanomeline High Dose")
 )
 ```
 

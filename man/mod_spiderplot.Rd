@@ -20,65 +20,78 @@ mod_spiderplot(
   height_range = NULL,
   title = NULL,
   subtitle = NULL,
+  filter_var = NULL,
+  filter_values = NULL,
+  filter_default_vals = NULL,
   receiver_id = NULL
 )
 }
 \arguments{
-\item{module_id}{`[character(1)]`. 
+\item{module_id}{\verb{[character(1)]}
 Unique identifier for the module.}
 
-\item{subject_level_dataset_name}{`[character(1)]`. 
+\item{subject_level_dataset_name}{\verb{[character(1)]}
 Name of the dataset containing the subject level information (e.g., "adsl").}
 
-\item{results_dataset_name}{`[character(1)]`. 
+\item{results_dataset_name}{\verb{[character(1)]}
 Name of the dataset containing the analysis results (e.g., "adtr").}
 
-\item{subjid_var}{`[character(1)]`. 
+\item{subjid_var}{\verb{[character(1)]}
 Variable name for subject identifier. (e.g., "USUBJID").}
 
-\item{x_vars}{`[character(1+)]`. 
-A character vector of variable names for the x-axis. Each element must be a 
-valid column name in the results dataset. Supported types are numeric 
-(e.g. "ADY") and character/factor (e.g. "AVISIT"). When multiple variables are 
+\item{x_vars}{\verb{[character(1+)]}
+A character vector of variable names for the x-axis. Each element must be a
+valid column name in the results dataset. Supported types are numeric
+(e.g. "ADY") and character/factor (e.g. "AVISIT"). When multiple variables are
 supplied (e.g., c("ADY", "AVISIT")), the first element is used as default in the plot.}
 
-\item{y_vars}{`[character(1+)]`. 
-A character vector of variable names for the y-axis. Each element must be a 
-valid column name in the results dataset. Supported types are numeric 
+\item{y_vars}{\verb{[character(1+)]}
+A character vector of variable names for the y-axis. Each element must be a
+valid column name in the results dataset. Supported types are numeric
 (e.g. "PCHG", "CHG"). At least one valid variable is required.}
 
-\item{color_vars}{`[character(1+) | NULL]`. 
+\item{color_vars}{\verb{[character(1+) | NULL]}
 Variable name(s) for color grouping (e.g., treatment arm).}
 
-\item{color_palette}{`[named character(1+) | NULL]`. 
+\item{color_palette}{\verb{[named character(1+) | NULL]}
 Custom color palette mapping factor levels to (hex) colors.}
 
-\item{tooltip}{`[named character vector | NULL]`. 
+\item{tooltip}{\verb{[named character vector | NULL]}
 Named character vector specifying tooltip content. Names are labels, values are column names.
 If NULL, defaults to using the subject ID variable for tooltips.}
 
-\item{facet_rows}{`[character(1+) | NULL]`. 
+\item{facet_rows}{\verb{[character(1+) | NULL]}
 Variable names for row faceting. (Splitting plot into subplots by rows)}
 
-\item{facet_cols}{`[character(1+) | NULL]`. 
+\item{facet_cols}{\verb{[character(1+) | NULL]}
 Variable names for column faceting. (Splitting plot into subplots by columns)}
 
-\item{height_default}{`[numeric(1) | NULL]`.
+\item{height_default}{\verb{[numeric(1) | NULL]}
 Default plot height in inches. If NULL, defaults to 5 inches.}
 
-\item{height_range}{`[numeric(2) | NULL]`.
+\item{height_range}{\verb{[numeric(2) | NULL]}
 Range of allowable plot heights in inches. If NULL, defaults to c(1, height_default * 2).}
 
-\item{title}{`[character(1) | NULL]`. 
+\item{title}{\verb{[character(1) | NULL]}
 Main plot title.}
 
-\item{subtitle}{`[character(1) | NULL]`. 
+\item{subtitle}{\verb{[character(1) | NULL]}
 Plot subtitle for additional context.}
 
-\item{receiver_id}{`[character(1) | NULL]`. 
+\item{filter_var}{\verb{[character(1) | NULL]}
+Name of variable to use for local filtering. This variable must exist on the dataset specified
+by \code{subject_level_dataset_name} or \code{results_dataset_name}.}
+
+\item{filter_values}{\verb{[character(1+) | NULL]}
+Character vector restricting the available filter choices.}
+
+\item{filter_default_vals}{\verb{[character(1+) | NULL]}
+Default selected values for the filter variable upon initialization.}
+
+\item{receiver_id}{\verb{[character(1) | NULL]}
 Module ID that will receive patient selection events from this module.}
 }
 \description{
-Creates an interactive spider plot module for visualizing 
+Creates an interactive spider plot module for visualizing
 individual patient trajectories over time in clinical trials.
 }
