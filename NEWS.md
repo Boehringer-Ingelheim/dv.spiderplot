@@ -1,4 +1,10 @@
+# dv.spiderplot 2.0.0-9002
+
+- Changed the font of plot to Liberation Sans
+- Adjusted plot height to ensure full-width display
+
 # dv.spiderplot 2.0.0-9001
+
 - Add vignette on module customization
 - Implement local filtering on a single variable
 - Add scroll bar to drop-down menu
