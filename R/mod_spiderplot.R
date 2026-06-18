@@ -176,7 +176,7 @@ spiderplot_UI <- function( # nolint
     ggiraph::girafeOutput(
       outputId = ns(POC$OUT_PLOT_ID),
       width = "100%",
-      height = NULL
+      height = "100%"
     )
   )
 }
