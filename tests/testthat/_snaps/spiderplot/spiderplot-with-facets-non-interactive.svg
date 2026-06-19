@@ -18,6 +18,7 @@
   </clipPath>
 </defs>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
+<rect x='0.00' y='-0.00000000000023' width='720.00' height='576.00' style='stroke-width: 0.87; stroke: none; fill: #FFFFFF;' />
 </g>
 <defs>
   <clipPath id='cpMjkuMjN8MzYzLjMyfDE4LjExfDI4Mi4xOA=='>
@@ -37,31 +38,31 @@
 <polyline points='156.50,282.18 156.50,18.11 ' style='stroke-width: 0.87; stroke: #EBEBEB; stroke-linecap: butt;' />
 <polyline points='236.05,282.18 236.05,18.11 ' style='stroke-width: 0.87; stroke: #EBEBEB; stroke-linecap: butt;' />
 <polyline points='315.59,282.18 315.59,18.11 ' style='stroke-width: 0.87; stroke: #EBEBEB; stroke-linecap: butt;' />
-<circle cx='76.96' cy='156.28' r='1.95' style='stroke-width: 0.71; fill: #000000;' />
-<circle cx='156.50' cy='141.76' r='1.95' style='stroke-width: 0.71; fill: #000000;' />
-<circle cx='236.05' cy='148.14' r='1.95' style='stroke-width: 0.71; fill: #000000;' />
-<circle cx='315.59' cy='77.00' r='1.95' style='stroke-width: 0.71; fill: #000000;' />
-<circle cx='76.96' cy='156.28' r='1.95' style='stroke-width: 0.71; fill: #000000;' />
-<circle cx='156.50' cy='162.52' r='1.95' style='stroke-width: 0.71; fill: #000000;' />
-<circle cx='236.05' cy='92.65' r='1.95' style='stroke-width: 0.71; fill: #000000;' />
-<circle cx='315.59' cy='103.49' r='1.95' style='stroke-width: 0.71; fill: #000000;' />
-<circle cx='76.96' cy='156.28' r='1.95' style='stroke-width: 0.71; fill: #000000;' />
-<circle cx='156.50' cy='57.34' r='1.95' style='stroke-width: 0.71; fill: #000000;' />
-<circle cx='236.05' cy='173.23' r='1.95' style='stroke-width: 0.71; fill: #000000;' />
-<circle cx='315.59' cy='226.18' r='1.95' style='stroke-width: 0.71; fill: #000000;' />
-<circle cx='76.96' cy='156.28' r='1.95' style='stroke-width: 0.71; fill: #000000;' />
-<circle cx='156.50' cy='265.98' r='1.95' style='stroke-width: 0.71; fill: #000000;' />
-<circle cx='236.05' cy='206.60' r='1.95' style='stroke-width: 0.71; fill: #000000;' />
-<circle cx='315.59' cy='151.18' r='1.95' style='stroke-width: 0.71; fill: #000000;' />
-<circle cx='76.96' cy='156.28' r='1.95' style='stroke-width: 0.71; fill: #000000;' />
-<circle cx='156.50' cy='181.81' r='1.95' style='stroke-width: 0.71; fill: #000000;' />
-<circle cx='236.05' cy='43.18' r='1.95' style='stroke-width: 0.71; fill: #000000;' />
-<circle cx='315.59' cy='212.81' r='1.95' style='stroke-width: 0.71; fill: #000000;' />
-<polyline points='76.96,156.28 156.50,141.76 236.05,148.14 315.59,77.00 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='76.96,156.28 156.50,162.52 236.05,92.65 315.59,103.49 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='76.96,156.28 156.50,57.34 236.05,173.23 315.59,226.18 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='76.96,156.28 156.50,265.98 236.05,206.60 315.59,151.18 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='76.96,156.28 156.50,181.81 236.05,43.18 315.59,212.81 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
+<circle cx='76.96' cy='156.28' r='1.60' style='stroke-width: 0.58; fill: #000000;' />
+<circle cx='156.50' cy='141.76' r='1.60' style='stroke-width: 0.58; fill: #000000;' />
+<circle cx='236.05' cy='148.14' r='1.60' style='stroke-width: 0.58; fill: #000000;' />
+<circle cx='315.59' cy='77.00' r='1.60' style='stroke-width: 0.58; fill: #000000;' />
+<circle cx='76.96' cy='156.28' r='1.60' style='stroke-width: 0.58; fill: #000000;' />
+<circle cx='156.50' cy='162.52' r='1.60' style='stroke-width: 0.58; fill: #000000;' />
+<circle cx='236.05' cy='92.65' r='1.60' style='stroke-width: 0.58; fill: #000000;' />
+<circle cx='315.59' cy='103.49' r='1.60' style='stroke-width: 0.58; fill: #000000;' />
+<circle cx='76.96' cy='156.28' r='1.60' style='stroke-width: 0.58; fill: #000000;' />
+<circle cx='156.50' cy='57.34' r='1.60' style='stroke-width: 0.58; fill: #000000;' />
+<circle cx='236.05' cy='173.23' r='1.60' style='stroke-width: 0.58; fill: #000000;' />
+<circle cx='315.59' cy='226.18' r='1.60' style='stroke-width: 0.58; fill: #000000;' />
+<circle cx='76.96' cy='156.28' r='1.60' style='stroke-width: 0.58; fill: #000000;' />
+<circle cx='156.50' cy='265.98' r='1.60' style='stroke-width: 0.58; fill: #000000;' />
+<circle cx='236.05' cy='206.60' r='1.60' style='stroke-width: 0.58; fill: #000000;' />
+<circle cx='315.59' cy='151.18' r='1.60' style='stroke-width: 0.58; fill: #000000;' />
+<circle cx='76.96' cy='156.28' r='1.60' style='stroke-width: 0.58; fill: #000000;' />
+<circle cx='156.50' cy='181.81' r='1.60' style='stroke-width: 0.58; fill: #000000;' />
+<circle cx='236.05' cy='43.18' r='1.60' style='stroke-width: 0.58; fill: #000000;' />
+<circle cx='315.59' cy='212.81' r='1.60' style='stroke-width: 0.58; fill: #000000;' />
+<polyline points='76.96,156.28 156.50,141.76 236.05,148.14 315.59,77.00 ' style='stroke-width: 0.87; stroke-linecap: butt;' />
+<polyline points='76.96,156.28 156.50,162.52 236.05,92.65 315.59,103.49 ' style='stroke-width: 0.87; stroke-linecap: butt;' />
+<polyline points='76.96,156.28 156.50,57.34 236.05,173.23 315.59,226.18 ' style='stroke-width: 0.87; stroke-linecap: butt;' />
+<polyline points='76.96,156.28 156.50,265.98 236.05,206.60 315.59,151.18 ' style='stroke-width: 0.87; stroke-linecap: butt;' />
+<polyline points='76.96,156.28 156.50,181.81 236.05,43.18 315.59,212.81 ' style='stroke-width: 0.87; stroke-linecap: butt;' />
 </g>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
 </g>
@@ -83,21 +84,21 @@
 <polyline points='156.50,550.73 156.50,286.66 ' style='stroke-width: 0.87; stroke: #EBEBEB; stroke-linecap: butt;' />
 <polyline points='236.05,550.73 236.05,286.66 ' style='stroke-width: 0.87; stroke: #EBEBEB; stroke-linecap: butt;' />
 <polyline points='315.59,550.73 315.59,286.66 ' style='stroke-width: 0.87; stroke: #EBEBEB; stroke-linecap: butt;' />
-<circle cx='76.96' cy='424.83' r='1.95' style='stroke-width: 0.71; fill: #000000;' />
-<circle cx='156.50' cy='470.74' r='1.95' style='stroke-width: 0.71; fill: #000000;' />
-<circle cx='236.05' cy='383.49' r='1.95' style='stroke-width: 0.71; fill: #000000;' />
-<circle cx='315.59' cy='491.12' r='1.95' style='stroke-width: 0.71; fill: #000000;' />
-<circle cx='76.96' cy='424.83' r='1.95' style='stroke-width: 0.71; fill: #000000;' />
-<circle cx='156.50' cy='331.86' r='1.95' style='stroke-width: 0.71; fill: #000000;' />
-<circle cx='236.05' cy='466.82' r='1.95' style='stroke-width: 0.71; fill: #000000;' />
-<circle cx='315.59' cy='470.35' r='1.95' style='stroke-width: 0.71; fill: #000000;' />
-<circle cx='76.96' cy='424.83' r='1.95' style='stroke-width: 0.71; fill: #000000;' />
-<circle cx='156.50' cy='317.40' r='1.95' style='stroke-width: 0.71; fill: #000000;' />
-<circle cx='236.05' cy='325.04' r='1.95' style='stroke-width: 0.71; fill: #000000;' />
-<circle cx='315.59' cy='454.96' r='1.95' style='stroke-width: 0.71; fill: #000000;' />
-<polyline points='76.96,424.83 156.50,470.74 236.05,383.49 315.59,491.12 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='76.96,424.83 156.50,331.86 236.05,466.82 315.59,470.35 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<polyline points='76.96,424.83 156.50,317.40 236.05,325.04 315.59,454.96 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
+<circle cx='76.96' cy='424.83' r='1.60' style='stroke-width: 0.58; fill: #000000;' />
+<circle cx='156.50' cy='470.74' r='1.60' style='stroke-width: 0.58; fill: #000000;' />
+<circle cx='236.05' cy='383.49' r='1.60' style='stroke-width: 0.58; fill: #000000;' />
+<circle cx='315.59' cy='491.12' r='1.60' style='stroke-width: 0.58; fill: #000000;' />
+<circle cx='76.96' cy='424.83' r='1.60' style='stroke-width: 0.58; fill: #000000;' />
+<circle cx='156.50' cy='331.86' r='1.60' style='stroke-width: 0.58; fill: #000000;' />
+<circle cx='236.05' cy='466.82' r='1.60' style='stroke-width: 0.58; fill: #000000;' />
+<circle cx='315.59' cy='470.35' r='1.60' style='stroke-width: 0.58; fill: #000000;' />
+<circle cx='76.96' cy='424.83' r='1.60' style='stroke-width: 0.58; fill: #000000;' />
+<circle cx='156.50' cy='317.40' r='1.60' style='stroke-width: 0.58; fill: #000000;' />
+<circle cx='236.05' cy='325.04' r='1.60' style='stroke-width: 0.58; fill: #000000;' />
+<circle cx='315.59' cy='454.96' r='1.60' style='stroke-width: 0.58; fill: #000000;' />
+<polyline points='76.96,424.83 156.50,470.74 236.05,383.49 315.59,491.12 ' style='stroke-width: 0.87; stroke-linecap: butt;' />
+<polyline points='76.96,424.83 156.50,331.86 236.05,466.82 315.59,470.35 ' style='stroke-width: 0.87; stroke-linecap: butt;' />
+<polyline points='76.96,424.83 156.50,317.40 236.05,325.04 315.59,454.96 ' style='stroke-width: 0.87; stroke-linecap: butt;' />
 </g>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
 </g>
@@ -119,11 +120,11 @@
 <polyline points='495.08,282.18 495.08,18.11 ' style='stroke-width: 0.87; stroke: #EBEBEB; stroke-linecap: butt;' />
 <polyline points='574.62,282.18 574.62,18.11 ' style='stroke-width: 0.87; stroke: #EBEBEB; stroke-linecap: butt;' />
 <polyline points='654.17,282.18 654.17,18.11 ' style='stroke-width: 0.87; stroke: #EBEBEB; stroke-linecap: butt;' />
-<circle cx='415.53' cy='156.28' r='1.95' style='stroke-width: 0.71; fill: #000000;' />
-<circle cx='495.08' cy='30.11' r='1.95' style='stroke-width: 0.71; fill: #000000;' />
-<circle cx='574.62' cy='174.16' r='1.95' style='stroke-width: 0.71; fill: #000000;' />
-<circle cx='654.17' cy='98.07' r='1.95' style='stroke-width: 0.71; fill: #000000;' />
-<polyline points='415.53,156.28 495.08,30.11 574.62,174.16 654.17,98.07 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
+<circle cx='415.53' cy='156.28' r='1.60' style='stroke-width: 0.58; fill: #000000;' />
+<circle cx='495.08' cy='30.11' r='1.60' style='stroke-width: 0.58; fill: #000000;' />
+<circle cx='574.62' cy='174.16' r='1.60' style='stroke-width: 0.58; fill: #000000;' />
+<circle cx='654.17' cy='98.07' r='1.60' style='stroke-width: 0.58; fill: #000000;' />
+<polyline points='415.53,156.28 495.08,30.11 574.62,174.16 654.17,98.07 ' style='stroke-width: 0.87; stroke-linecap: butt;' />
 </g>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
 </g>
@@ -145,11 +146,11 @@
 <polyline points='495.08,550.73 495.08,286.66 ' style='stroke-width: 0.87; stroke: #EBEBEB; stroke-linecap: butt;' />
 <polyline points='574.62,550.73 574.62,286.66 ' style='stroke-width: 0.87; stroke: #EBEBEB; stroke-linecap: butt;' />
 <polyline points='654.17,550.73 654.17,286.66 ' style='stroke-width: 0.87; stroke: #EBEBEB; stroke-linecap: butt;' />
-<circle cx='415.53' cy='424.83' r='1.95' style='stroke-width: 0.71; fill: #000000;' />
-<circle cx='495.08' cy='351.88' r='1.95' style='stroke-width: 0.71; fill: #000000;' />
-<circle cx='574.62' cy='538.73' r='1.95' style='stroke-width: 0.71; fill: #000000;' />
-<circle cx='654.17' cy='322.03' r='1.95' style='stroke-width: 0.71; fill: #000000;' />
-<polyline points='415.53,424.83 495.08,351.88 574.62,538.73 654.17,322.03 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
+<circle cx='415.53' cy='424.83' r='1.60' style='stroke-width: 0.58; fill: #000000;' />
+<circle cx='495.08' cy='351.88' r='1.60' style='stroke-width: 0.58; fill: #000000;' />
+<circle cx='574.62' cy='538.73' r='1.60' style='stroke-width: 0.58; fill: #000000;' />
+<circle cx='654.17' cy='322.03' r='1.60' style='stroke-width: 0.58; fill: #000000;' />
+<polyline points='415.53,424.83 495.08,351.88 574.62,538.73 654.17,322.03 ' style='stroke-width: 0.87; stroke-linecap: butt;' />
 </g>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
 </g>
