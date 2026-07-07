@@ -172,10 +172,11 @@ spiderplot_UI <- function( # nolint
 
   shiny::tagList(
     drop_menu,
+    gdtools::liberationsansHtmlDependency(),
     ggiraph::girafeOutput(
       outputId = ns(POC$OUT_PLOT_ID),
       width = "100%",
-      height = NULL
+      height = "100%"
     )
   )
 }
@@ -217,6 +218,8 @@ spiderplot_server <- function(
   filter_flag <- !is.null(filter_var)
 
   module <- function(input, output, session) {
+    gdtools::register_liberationsans()
+
     dataset_validated <- shiny::reactive({
       subject_level_dataset <- datasets()[["subject_level"]]
       results_dataset <- datasets()[["results"]]

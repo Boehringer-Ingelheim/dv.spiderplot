@@ -61,7 +61,7 @@ spiderplot <- function(
       x = x_label,
       y = y_label
     ) +
-    ggplot2::theme_minimal()    
+    ggplot2::theme_minimal(base_family = "Liberation Sans", base_size = 9)
   if (!is.null(color_var) && color_var == "") color_var <- NULL
   if (!is.null(color_var)) {
     color_label <- attr(data[[color_var]], "label")
