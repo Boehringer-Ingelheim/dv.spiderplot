@@ -1,6 +1,6 @@
 Package: dv.spiderplot
 Title: Module for the display of spider plot
-Version: 2.0.0-9002
+Version: 2.1.0
 Authors@R: c(
       person("Boehringer-Ingelheim Pharma GmbH & Co.KG", role = c("cph", "fnd")),
       person(given = "Ming",
@@ -24,6 +24,9 @@ Description: A DaVinci module that displays spider plot for efficacy and safety 
 License: Apache License (>= 2)
 Encoding: UTF-8
 LazyData: true
+URL: https://boehringer-ingelheim.github.io/dv.spiderplot,
+    https://github.com/boehringer-ingelheim/dv.spiderplot
+BugReports: https://github.com/boehringer-ingelheim/dv.spiderplot/issues
 Depends: R (>= 4.1.0)
 Imports:
     checkmate (>= 2.3.1),
