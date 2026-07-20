@@ -34,15 +34,15 @@ spiderplot_mod <- dv.spiderplot::mod_spiderplot(
   facet_rows = c("SEX", "ETHNIC"),
   facet_cols = c("ARM", "AGEGR1"),
   title = "Interactive Spider Plot",
-  subtitle = "CDISC-PILOT-01"
+  subtitle = "CDISC-PILOT-01",
+  filter_var = "ARM"
 )
 
 # launch shiny app
 dv.manager::run_app(
-  data = list("Demo" = list(adsl = adsl, adtr = adtr)), 
+  data = list("Demo" = list(adsl = adsl, adtr = adtr)),
   module_list = list("Spider Plot" = spiderplot_mod),
   title = "Spider Plot Demo",
   filter_data = "adsl",
-  filter_key = "USUBJID",
-  filter_type = "datasets"
+  filter_key = "USUBJID"
 )

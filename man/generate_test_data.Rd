@@ -7,10 +7,10 @@
 generate_test_data(n_subjects = 10, seed = NULL)
 }
 \arguments{
-\item{n_subjects}{`[integer(1)]`
+\item{n_subjects}{\verb{[integer(1)]}
 Number of subjects to generate (default: 10)}
 
-\item{seed}{`[integer(1) | NULL]`
+\item{seed}{\verb{[integer(1) | NULL]}
 Random seed for reproducibility (default: NULL)}
 }
 \description{
