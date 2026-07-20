@@ -5,12 +5,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Getting Started with dv.spiderplot • dv.spiderplot</title>
+<title>Spider Plot Module • dv.spiderplot</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Getting Started with dv.spiderplot">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Spider Plot Module">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">dv.spiderplot</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,6 +35,7 @@
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
 <li><a class="dropdown-item" href="../articles/communication.html">Communication with DaVinci Modules</a></li>
+    <li><a class="dropdown-item" href="../articles/customization.html">Module Customization</a></li>
     <li><a class="dropdown-item" href="../articles/qc.html">Quality Control</a></li>
   </ul>
 </li>
@@ -55,21 +56,25 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
 
-      <h1>Getting Started with dv.spiderplot</h1>
+      <h1>Spider Plot Module</h1>
             
       
-
+      <small class="dont-index">Source: <a href="https://github.com/boehringer-ingelheim/dv.spiderplot/blob/main/vignettes/dv-spiderplot.Rmd" class="external-link"><code>vignettes/dv-spiderplot.Rmd</code></a></small>
       <div class="d-none name"><code>dv-spiderplot.Rmd</code></div>
     </div>
 
     
     
+<div class="section level2">
+<h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+</h2>
 <p>The DaVinci Spider Plot Module is an interactive Shiny module
 designed for visualizing individual patient trajectories over time in
 clinical trials, particularly valuable for oncology efficacy analysis.
 This module creates spider plots that display patient-level response
 data, showing changes in tumor size or other clinical measurements
 across multiple visits.</p>
+</div>
 <div class="section level2">
 <h2 id="data-preparation">Data Preparation<a class="anchor" aria-label="anchor" href="#data-preparation"></a>
 </h2>
@@ -127,7 +132,10 @@ will be available to users.</p>
 <span>  facet_rows <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"SEX"</span>, <span class="st">"ETHNIC"</span><span class="op">)</span>,</span>
 <span>  facet_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ARM"</span>, <span class="st">"AGEGR1"</span><span class="op">)</span>,</span>
 <span>  title <span class="op">=</span> <span class="st">"Interactive Spider Plot"</span>,</span>
-<span>  subtitle <span class="op">=</span> <span class="st">"CDISC-PILOT-01"</span></span>
+<span>  subtitle <span class="op">=</span> <span class="st">"CDISC-PILOT-01"</span>,</span>
+<span>  filter_var <span class="op">=</span> <span class="st">"ARM"</span>,</span>
+<span>  filter_values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Placebo"</span>, <span class="st">"Xanomeline Low Dose"</span>, <span class="st">"Xanomeline High Dose"</span><span class="op">)</span>,</span>
+<span>  filter_default_vals <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Xanomeline Low Dose"</span>, <span class="st">"Xanomeline High Dose"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
@@ -141,8 +149,7 @@ plot application using the DaVinci module manager.</p>
 <span>  module_list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"Spider Plot"</span> <span class="op">=</span> <span class="va">spiderplot_mod</span><span class="op">)</span>,</span>
 <span>  title <span class="op">=</span> <span class="st">"Spider Plot Demo"</span>,</span>
 <span>  filter_data <span class="op">=</span> <span class="st">"adsl"</span>,</span>
-<span>  filter_key <span class="op">=</span> <span class="st">"USUBJID"</span>,</span>
-<span>  filter_type <span class="op">=</span> <span class="st">"datasets"</span></span>
+<span>  filter_key <span class="op">=</span> <span class="st">"USUBJID"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
@@ -156,7 +163,7 @@ plot application using the DaVinci module manager.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>

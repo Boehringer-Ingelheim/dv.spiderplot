@@ -1,0 +1,91 @@
+# Spider Plot Module
+
+## Introduction
+
+The DaVinci Spider Plot Module is an interactive Shiny module designed
+for visualizing individual patient trajectories over time in clinical
+trials, particularly valuable for oncology efficacy analysis. This
+module creates spider plots that display patient-level response data,
+showing changes in tumor size or other clinical measurements across
+multiple visits.
+
+## Data Preparation
+
+Before creating our spider plot module, we need to prepare the clinical
+trial data. We’ll use example datasets from the `pharmaverseadam`
+package, which provides CDISC ADaM-compliant datasets commonly used in
+clinical trials.
+
+``` r
+adsl <- pharmaverseadam::adsl
+adtr <- pharmaverseadam::adtr_onco |>
+  dplyr::mutate(
+    ARM = factor(ARM, levels = c("Placebo", "Xanomeline Low Dose", "Xanomeline High Dose")),
+    SEX = factor(SEX, levels = c("F", "M"), labels = c("Female", "Male")),
+    AVISIT = forcats::fct_reorder(AVISIT, AVISITN)
+  )
+
+# add back labels lost during data manipulation
+attr(adtr[["ARM"]], "label") <- "Planned Arm"
+attr(adtr[["SEX"]], "label") <- "Sex"
+attr(adtr[["AVISIT"]], "label") <- "Analysis Visit"
+
+# add timestamp to be displayed in the app
+attr(adsl, "meta") <- list(mtime = Sys.time())
+attr(adtr, "meta") <- list(mtime = Sys.time())
+```
+
+## Module Configuration
+
+Now that our data is prepared, we can configure the spider plot module
+via the
+[`mod_spiderplot()`](https://boehringer-ingelheim.github.io/dv.spiderplot/reference/mod_spiderplot.md)
+function. This configuration defines how the spider plot will behave and
+what options will be available to users.
+
+``` r
+spiderplot_mod <- dv.spiderplot::mod_spiderplot(
+  module_id = "mod_spider",
+  subject_level_dataset_name = "adsl",
+  results_dataset_name = "adtr",
+  subjid_var = "USUBJID",
+  x_vars = c("ADY", "AVISIT"),
+  y_vars = c("PCHG", "CHG"),
+  color_vars = c("ARM", "AGEGR1"),
+  color_palette = c(
+    "Placebo" = "red",
+    "Xanomeline Low Dose" = "green",
+    "Xanomeline High Dose" = "blue"
+  ),
+  tooltip = c(
+    "Unique Subject Identifier: " = "USUBJID",
+    "Planned Arm: " = "ARM",
+    "Analysis Visit: " = "AVISIT",
+    "Days Since Randomization: " = "ADY",
+    "Change from Baseline: " = "CHG",
+    "Percent Change from Baseline: " = "PCHG"
+  ),
+  facet_rows = c("SEX", "ETHNIC"),
+  facet_cols = c("ARM", "AGEGR1"),
+  title = "Interactive Spider Plot",
+  subtitle = "CDISC-PILOT-01",
+  filter_var = "ARM",
+  filter_values = c("Placebo", "Xanomeline Low Dose", "Xanomeline High Dose"),
+  filter_default_vals = c("Xanomeline Low Dose", "Xanomeline High Dose")
+)
+```
+
+## Running the Demo Application
+
+With our module configured, we can now launch the interactive spider
+plot application using the DaVinci module manager.
+
+``` r
+dv.manager::run_app(
+  data = list("Demo" = list(adsl = adsl, adtr = adtr)), 
+  module_list = list("Spider Plot" = spiderplot_mod),
+  title = "Spider Plot Demo",
+  filter_data = "adsl",
+  filter_key = "USUBJID"
+)
+```

@@ -1,0 +1,57 @@
+# dv.spiderplot
+
+![Spider Plot Example](reference/figures/dv-spiderplot.png)
+
+Spider Plot Example
+
+## Overview
+
+The {dv.spiderplot} package provides a Shiny module for creating
+interactive spider plots that visualize patient-level response data over
+time. The module is designed to work with DaVinci’s
+{[dv.manager](https://boehringer-ingelheim.github.io/dv.manager/)}
+package and supports its filtering functionality. Spider plots are
+particularly valuable in oncology efficacy analysis, where they display
+individual patient trajectories showing changes in tumor size or other
+clinical measurements across multiple visits.
+
+## Installation
+
+You can install the development version of {dv.spiderplot} from:
+
+``` r
+if (!require("remotes")) install.packages("remotes")
+remotes::install_github("Boehringer-Ingelheim/dv.spiderplot")
+```
+
+See
+[`vignette("dv-spiderplot")`](https://boehringer-ingelheim.github.io/dv.spiderplot/articles/dv-spiderplot.md)
+for further information on how to use {dv.spiderplot} with
+{[dv.manager](https://boehringer-ingelheim.github.io/dv.manager/)} to
+create interactive spider plots with ADaM data from {pharmaverseadam}.
+
+# Package index
+
+## All functions
+
+- [`mock_spiderplot_mm()`](https://boehringer-ingelheim.github.io/dv.spiderplot/reference/mock_spiderplot_mm.md)
+  : Mock Application for Spider Plot Module
+- [`mod_spiderplot()`](https://boehringer-ingelheim.github.io/dv.spiderplot/reference/mod_spiderplot.md)
+  : Spider Plot Module
+- [`spiderplot_UI()`](https://boehringer-ingelheim.github.io/dv.spiderplot/reference/spiderplot_UI.md)
+  : Spider Plot Module UI
+- [`spiderplot_server()`](https://boehringer-ingelheim.github.io/dv.spiderplot/reference/spiderplot_server.md)
+  : Spider Plot Module Server
+
+# Articles
+
+### All vignettes
+
+- [Communication with DaVinci
+  Modules](https://boehringer-ingelheim.github.io/dv.spiderplot/articles/communication.md):
+- [Module
+  Customization](https://boehringer-ingelheim.github.io/dv.spiderplot/articles/customization.md):
+- [Spider Plot
+  Module](https://boehringer-ingelheim.github.io/dv.spiderplot/articles/dv-spiderplot.md):
+- [Quality
+  Control](https://boehringer-ingelheim.github.io/dv.spiderplot/articles/qc.md):

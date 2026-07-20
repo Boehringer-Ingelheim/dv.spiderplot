@@ -1,0 +1,40 @@
+# Communication with DaVinci Modules
+
+This vignette demonstrates how DaVinci modules can communicate with each
+other within a single application. Specifically, it shows how the
+spider-plot module can send a selected patient ID to the patient-profile
+module, allowing users to jump directly from a data point in the spider
+plot to a detailed profile view of that patient.
+
+``` r
+papo_mod <- dv.papo::mod_patient_profile(
+  module_id = "mod_papo",
+  subject_level_dataset_name = "adsl",
+  subjid_var = "USUBJID",
+  sender_ids = "mod_spider",
+  summary = list(
+    vars = c("USUBJID", "AGE", "SEX", "ARM"),
+    column_count = 2
+  )
+)
+```
+
+To enable navigation from the spider plot to the patient profile, the
+app creator simply sets `receiver_id = "mod_papo"` in the spider plot
+module’s configuration.
+
+``` r
+dv.manager::run_app(
+  data = list(
+    "Demo" = list(adsl = adsl, adtr = adtr)
+  ), 
+  module_list = list(
+    "Spider Plot" = spiderplot_mod,
+    "Patient Profile" = papo_mod
+  ),
+  title = "Spider Plot Demo",
+  filter_data = "adsl",
+  filter_key = "USUBJID",
+  filter_type = "datasets"
+)
+```

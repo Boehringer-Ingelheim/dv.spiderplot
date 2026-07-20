@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">dv.spiderplot</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,6 +20,7 @@
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/communication.html">Communication with DaVinci Modules</a></li>
+    <li><a class="dropdown-item" href="../articles/customization.html">Module Customization</a></li>
     <li><a class="dropdown-item" href="../articles/qc.html">Quality Control</a></li>
   </ul></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
@@ -33,7 +34,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Spider Plot Module Server</h1>
-
+      <small class="dont-index">Source: <a href="https://github.com/boehringer-ingelheim/dv.spiderplot/blob/main/R/mod_spiderplot.R" class="external-link"><code>R/mod_spiderplot.R</code></a></small>
       <div class="d-none name"><code>spiderplot_server.Rd</code></div>
     </div>
 
@@ -49,13 +50,16 @@
 <span>  <span class="va">subjid_var</span>,</span>
 <span>  <span class="va">x_vars</span>,</span>
 <span>  <span class="va">y_vars</span>,</span>
-<span>  <span class="va">color_vars</span>,</span>
+<span>  color_vars <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  color_palette <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  tooltip <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  facet_rows <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  facet_cols <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  title <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  subtitle <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  filter_var <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  filter_values <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  filter_default_vals <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  switch_func <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  receiver_id <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -66,22 +70,22 @@
 
 
 <dl><dt id="arg-id">id<a class="anchor" aria-label="anchor" href="#arg-id"></a></dt>
-<dd><p>`[character(1)]`.
+<dd><p><code>[character(1)]</code>
 Unique identifier for the module server.</p></dd>
 
 
 <dt id="arg-datasets">datasets<a class="anchor" aria-label="anchor" href="#arg-datasets"></a></dt>
-<dd><p>`[list(2)]`.
+<dd><p><code>[list(2)]</code>
 A list containing subject level and analysis results datasets.</p></dd>
 
 
 <dt id="arg-subjid-var">subjid_var<a class="anchor" aria-label="anchor" href="#arg-subjid-var"></a></dt>
-<dd><p>`[character(1)]`.
+<dd><p><code>[character(1)]</code>
 Variable name for subject identifier. (e.g., "USUBJID").</p></dd>
 
 
 <dt id="arg-x-vars">x_vars<a class="anchor" aria-label="anchor" href="#arg-x-vars"></a></dt>
-<dd><p>`[character(1+)]`.
+<dd><p><code>[character(1+)]</code>
 A character vector of variable names for the x-axis. Each element must be a
 valid column name in the results dataset. Supported types are numeric
 (e.g. "ADY") and character/factor (e.g. "AVISIT"). When multiple variables are
@@ -89,55 +93,71 @@ supplied (e.g., c("ADY", "AVISIT")), the first element is used as default in the
 
 
 <dt id="arg-y-vars">y_vars<a class="anchor" aria-label="anchor" href="#arg-y-vars"></a></dt>
-<dd><p>`[character(1+)]`.
+<dd><p><code>[character(1+)]</code>
 A character vector of variable names for the y-axis. Each element must be a
 valid column name in the results dataset. Supported types are numeric
 (e.g. "PCHG", "CHG"). At least one valid variable is required.</p></dd>
 
 
 <dt id="arg-color-vars">color_vars<a class="anchor" aria-label="anchor" href="#arg-color-vars"></a></dt>
-<dd><p>`[character(1+) | NULL]`.
+<dd><p><code>[character(1+) | NULL]</code>
 Variable name(s) for color grouping (e.g., treatment arm).</p></dd>
 
 
 <dt id="arg-color-palette">color_palette<a class="anchor" aria-label="anchor" href="#arg-color-palette"></a></dt>
-<dd><p>`[named character(1+) | NULL]`.
+<dd><p><code>[named character(1+) | NULL]</code>
 Custom color palette mapping factor levels to (hex) colors.</p></dd>
 
 
 <dt id="arg-tooltip">tooltip<a class="anchor" aria-label="anchor" href="#arg-tooltip"></a></dt>
-<dd><p>`[named character vector | NULL]`.
+<dd><p><code>[named character vector | NULL]</code>
 Named character vector specifying tooltip content. Names are labels, values are column names.
 If NULL, defaults to using the subject ID variable for tooltips.</p></dd>
 
 
 <dt id="arg-facet-rows">facet_rows<a class="anchor" aria-label="anchor" href="#arg-facet-rows"></a></dt>
-<dd><p>`[character(1+) | NULL]`.
+<dd><p><code>[character(1+) | NULL]</code>
 Variable names for row faceting. (Splitting plot into subplots by rows)</p></dd>
 
 
 <dt id="arg-facet-cols">facet_cols<a class="anchor" aria-label="anchor" href="#arg-facet-cols"></a></dt>
-<dd><p>`[character(1+) | NULL]`.
+<dd><p><code>[character(1+) | NULL]</code>
 Variable names for column faceting. (Splitting plot into subplots by columns)</p></dd>
 
 
 <dt id="arg-title">title<a class="anchor" aria-label="anchor" href="#arg-title"></a></dt>
-<dd><p>`[character(1) | NULL]`.
+<dd><p><code>[character(1) | NULL]</code>
 Main plot title.</p></dd>
 
 
 <dt id="arg-subtitle">subtitle<a class="anchor" aria-label="anchor" href="#arg-subtitle"></a></dt>
-<dd><p>`[character(1) | NULL]`.
+<dd><p><code>[character(1) | NULL]</code>
 Plot subtitle for additional context.</p></dd>
 
 
+<dt id="arg-filter-var">filter_var<a class="anchor" aria-label="anchor" href="#arg-filter-var"></a></dt>
+<dd><p><code>[character(1) | NULL]</code>
+Name of variable to use for local filtering. This variable must exist on the dataset specified
+by <code>subject_level_dataset_name</code> or <code>results_dataset_name</code>.</p></dd>
+
+
+<dt id="arg-filter-values">filter_values<a class="anchor" aria-label="anchor" href="#arg-filter-values"></a></dt>
+<dd><p><code>[character(1+) | NULL]</code>
+Character vector restricting the available filter choices.</p></dd>
+
+
+<dt id="arg-filter-default-vals">filter_default_vals<a class="anchor" aria-label="anchor" href="#arg-filter-default-vals"></a></dt>
+<dd><p><code>[character(1+) | NULL]</code>
+Default selected values for the filter variable upon initialization.</p></dd>
+
+
 <dt id="arg-switch-func">switch_func<a class="anchor" aria-label="anchor" href="#arg-switch-func"></a></dt>
-<dd><p>`[function | NULL]`.
+<dd><p><code>[function | NULL]</code>
 Function to switch to a different module when a patient is selected.</p></dd>
 
 
 <dt id="arg-receiver-id">receiver_id<a class="anchor" aria-label="anchor" href="#arg-receiver-id"></a></dt>
-<dd><p>`[character(1) | NULL]`.
+<dd><p><code>[character(1) | NULL]</code>
 Module ID that will receive patient selection events from this module.</p></dd>
 
 </dl></div>
@@ -151,7 +171,7 @@ Module ID that will receive patient selection events from this module.</p></dd>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>
