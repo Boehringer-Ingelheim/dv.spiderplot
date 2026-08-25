@@ -641,7 +641,7 @@ mod_spiderplot <- function(
     spiderplot_server(
       id = module_id,
       datasets = shiny::reactive({
-        filtered_datasets <- afmm[["filtered_dataset"]]()
+        filtered_datasets <- afmm[["filtered_dataset_list"]]()
         checkmate::assert_subset(
           c(subject_level_dataset_name, results_dataset_name),
           choices = names(filtered_datasets)
