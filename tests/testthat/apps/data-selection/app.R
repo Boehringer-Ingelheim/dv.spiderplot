@@ -13,6 +13,6 @@ dv.manager::run_app(
       y_vars = c("PCHG")
     )
   ),
-  filter_data = "adsl",
+  filter_dataset_name = "adsl",
   filter_key = "USUBJID"
 )

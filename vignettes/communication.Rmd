@@ -41,7 +41,7 @@ dv.manager::run_app(
     "Patient Profile" = papo_mod
   ),
   title = "Spider Plot Demo",
-  filter_data = "adsl",
+  filter_dataset_name = "adsl",
   filter_key = "USUBJID",
   filter_type = "datasets"
 )
