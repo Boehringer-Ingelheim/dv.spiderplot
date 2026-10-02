@@ -1,6 +1,6 @@
-# dv.spiderplot 2.1.0-9000
+# dv.spiderplot 2.1.1
 
-- [NOT USER-FACING/REMOVE BEFORE PR TO MAIN] Address dv.manager deprecation warning messages
+- Address dv.manager deprecation warning messages
 
 # dv.spiderplot 2.1.0
 
