@@ -43,6 +43,6 @@ dv.manager::run_app(
   data = list("Demo" = list(adsl = adsl, adtr = adtr)),
   module_list = list("Spider Plot" = spiderplot_mod),
   title = "Spider Plot Demo",
-  filter_data = "adsl",
+  filter_dataset_name = "adsl",
   filter_key = "USUBJID"
 )

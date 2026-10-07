@@ -34,7 +34,7 @@ mock_spiderplot_mm <- function() {
     data = list("Mock Demo" = test_data),
     module_list = list("Spider Plot" = spiderplot_mod),
     title = "Mock Spider Plot Application",
-    filter_data = "adsl",
+    filter_dataset_name = "adsl",
     filter_key = "USUBJID"
   )
 }
