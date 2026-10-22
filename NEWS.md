@@ -1,3 +1,7 @@
+# dv.spiderplot 2.1.2
+
+- bugfix drill down not working 
+
 # dv.spiderplot 2.1.1
 
 - Address dv.manager deprecation warning messages
