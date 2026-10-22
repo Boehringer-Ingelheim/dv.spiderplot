@@ -1,4 +1,4 @@
-# dv.spiderplot 2.1.1-9000
+# dv.spiderplot 2.1.2
 
 - bugfix drill down not working 
 
