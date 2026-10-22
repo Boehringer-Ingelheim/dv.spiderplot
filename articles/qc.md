@@ -1,8 +1,8 @@
 # Quality Control
 
-### ✅ dv.spiderplot 2.1.1
+### ✅ dv.spiderplot 2.1.2
 
-Date: 2026-Oct-07 07:53:10
+Date: 2026-Oct-22 09:49:08
 
 This document provides the Quality Control (QC) report for the R package
 to confirm that it fulfills the criteria required for a “released”
@@ -59,7 +59,7 @@ test execution.
     #>  collate  en_US.UTF-8
     #>  ctype    en_US.UTF-8
     #>  tz       Etc/UTC
-    #>  date     2026-10-07
+    #>  date     2026-10-22
     #>  pandoc   3.6.3 @ /usr/bin/ (via rmarkdown)
     #>  quarto   1.8.26 @ /usr/local/bin/quarto
     #> 
@@ -104,7 +104,7 @@ test execution.
     #>  xfun          0.57    2026-03-20 [2] RSPM
     #>  yaml          2.3.12  2025-12-10 [2] RSPM
     #> 
-    #>  [1] /tmp/Rtmpm34y82/temp_libpath20853e542db
+    #>  [1] /tmp/RtmpdGRiPX/temp_libpath20846b3735
     #>  [2] /usr/local/lib/R/site-library
     #>  [3] /usr/local/lib/R/library
     #> 
