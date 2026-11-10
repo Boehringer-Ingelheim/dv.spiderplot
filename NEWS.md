@@ -1,3 +1,7 @@
+# dv.spiderplot 2.1.2-9000
+
+- [NOT USER-FACING] Expand "communication with papo" snippet to check switching to the papo tab
+
 # dv.spiderplot 2.1.2
 
 - bugfix drill down not working 

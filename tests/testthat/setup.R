@@ -10,7 +10,7 @@ vdoc <- local({
 specs <- vdoc[["specs"]]
 #  validation (F)
 
-# YT#VHcb39336d4fcc5b936a31ce2666bcf27c#VH3b377124b258c8f7c5c9951207153ecb#
+# YT#VHffa908a1bb44fc2a0f57cda7da1db8a8#VHcb39336d4fcc5b936a31ce2666bcf27c#
 
 #' Test harness for communication with `dv.papo`.
 #'
@@ -18,11 +18,16 @@ specs <- vdoc[["specs"]]
 #' @param data Data matching the previous parameterization.
 #' @param trigger_input_id Fully namespaced input ID that, when set to a subject ID value,
 #'                         should make the module send `dv.papo` a message.
-test_communication_with_papo <- function(mod, data, trigger_input_id, papo_spec_id, papo_spec_text) {
+test_communication_with_papo <- function(mod, data, trigger_input_id, papo_spec_id, papo_spec_text,
+                                         check_switch_to_papo = TRUE) {
+  # 2026-10-23: [fix] Match {dv.manager} name of `switch2mod` parameter
+  #             [feature] Optionally check that a switch to papo happens (`check_switch_to_papo`)
   # 2026-08-25: [fix] Support new dv.manager >= 3.1.0 afmm field names
 
   datasets <- shiny::reactive(data)
   
+  switch2mod_call_log <- character(0)
+
   afmm <- list(
     data = list(DS = data),
     unfiltered_dataset = datasets,                                         # deprecated by dv.manager >= 3.1.0
@@ -31,7 +36,7 @@ test_communication_with_papo <- function(mod, data, trigger_input_id, papo_spec_
     filtered_dataset_list = datasets,                                      # encouraged by dv.manager >= 3.1.0
     module_output = function() list(),
     module_names = list(papo = "Papo"),
-    utils = list(switch2mod = function(id) NULL),
+    utils = list(switch2mod = function(selected) switch2mod_call_log <<- c(switch2mod_call_log, selected)),
     dataset_metadata = list(name = shiny::reactive("dummy_dataset_name")), # deprecated on dv.manager >= 3.1.0
     unfiltered_dataset_list_with_filter_info = shiny::reactive(            # encouraged by dv.manager >= 3.1.0
       list(unfiltered_dataset_list = structure("WHATEVER", dataset_list_name = "dummy_dataset_name"))
@@ -50,7 +55,8 @@ test_communication_with_papo <- function(mod, data, trigger_input_id, papo_spec_
     
     shiny::exportTestValues(
       ret_value = try(ret_value[["subj_id"]]()), # try because of https://github.com/rstudio/shiny/issues/3768
-      update_count = ret_value_update_count()
+      update_count = ret_value_update_count(),
+      switch2mod_call_log = switch2mod_call_log
     )
     return(ret_value)
   }
@@ -85,6 +91,9 @@ test_communication_with_papo <- function(mod, data, trigger_input_id, papo_spec_
       # Module outputs selection once
       testthat::expect_equal(exports[["ret_value"]], subject_ids[[i]])
       testthat::expect_equal(exports[["update_count"]], i)
+      if(isTRUE(check_switch_to_papo)){
+        testthat::expect_equal(exports[["switch2mod_call_log"]], rep("papo", i))
+      }
     }
     
     app$stop()      
