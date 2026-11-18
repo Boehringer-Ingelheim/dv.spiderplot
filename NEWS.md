@@ -1,6 +1,8 @@
-# dv.spiderplot 2.1.2-9000
+# dv.spiderplot 2.1.2-9001
 
 - Implement early error feedback
+
+# dv.spiderplot 2.1.2-9000
 
 - [NOT USER-FACING] Expand "communication with papo" snippet to check switching to the papo tab
 
