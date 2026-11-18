@@ -589,39 +589,7 @@ mod_spiderplot <- function(
   filter_default_vals = NULL,
   receiver_id = NULL
 ) {
-  checkmate::assert_string(module_id, min.chars = 1)
-  checkmate::assert_string(subject_level_dataset_name, min.chars = 1)
-  checkmate::assert_string(results_dataset_name, min.chars = 1)
-  checkmate::assert_string(subjid_var, min.chars = 1)
-  checkmate::assert_character(x_vars, min.len = 1, min.chars = 1)
-  checkmate::assert_character(y_vars, min.len = 1, min.chars = 1)
-  checkmate::assert_character(color_vars, min.len = 1, min.chars = 1, null.ok = TRUE)
-  checkmate::assert_character(color_palette, names = "named", min.chars = 1, null.ok = TRUE)
-  checkmate::assert_character(tooltip, min.len = 1, min.chars = 1, names = "named", null.ok = TRUE)
-  checkmate::assert_character(facet_rows, min.len = 1, min.chars = 1, null.ok = TRUE)
-  checkmate::assert_character(facet_cols, min.len = 1, min.chars = 1, null.ok = TRUE)
-  checkmate::assert_numeric(height_default, len = 1, lower = 1, null.ok = TRUE)
-  checkmate::assert_numeric(height_range, len = 2, lower = 1, null.ok = TRUE)
-  checkmate::assert_string(title, min.chars = 1, null.ok = TRUE)
-  checkmate::assert_string(subtitle, min.chars = 1, null.ok = TRUE)
-  checkmate::assert_string(filter_var, null.ok = TRUE)
-  checkmate::assert_character(
-    filter_values,
-    min.chars = 1,
-    any.missing = FALSE,
-    unique = TRUE,
-    min.len = 1,
-    null.ok = TRUE
-  )
-  checkmate::assert_character(
-    filter_default_vals,
-    min.chars = 1,
-    any.missing = FALSE,
-    unique = TRUE,
-    min.len = 1,
-    null.ok = TRUE
-  )
-  checkmate::assert_string(receiver_id, min.chars = 1, null.ok = TRUE)
+  # Argument validation happens in `check_mod_spiderplot()`
 
   ui <- function(id) {
     spiderplot_UI(
@@ -670,7 +638,175 @@ mod_spiderplot <- function(
   }
 
   dataset_names <- c(subject_level_dataset_name, results_dataset_name)
-  meta <- list(dataset_info = list(all = dataset_names))
+  meta <- list(
+    dataset_info = list(all = dataset_names),
+    check_mod_fn = function(afmm, datasets) {
+      check_mod_spiderplot(
+        afmm, datasets, module_id, subject_level_dataset_name, results_dataset_name, subjid_var,
+        x_vars, y_vars, color_vars, color_palette, tooltip, facet_rows, facet_cols, height_default,
+        height_range, title, subtitle, filter_var, filter_values, filter_default_vals, receiver_id
+      )
+    }
+  )
 
   list(ui = ui, server = server, module_id = module_id, meta = meta)
+}
+
+mod_spiderplot_API_docs <- list(
+  "Spider Plot",
+  module_id = list("Unique identifier for the module"),
+  subject_level_dataset_name = list("Name of the dataset containing the subject level information"),
+  results_dataset_name = list("Name of the dataset containing the analysis results"),
+  subjid_var = list("Subject identifier variable"),
+  x_vars = list("Candidate variables for the x-axis"),
+  y_vars = list("Candidate variables for the y-axis"),
+  color_vars = list("Candidate variables for color grouping"),
+  color_palette = list("Named mapping of factor levels to colors"),
+  tooltip = list("Named mapping of tooltip labels to column names"),
+  facet_rows = list("Candidate variables for row faceting"),
+  facet_cols = list("Candidate variables for column faceting"),
+  height_default = list("Default plot height in inches"),
+  height_range = list("Range of allowable plot heights in inches"),
+  title = list("Main plot title"),
+  subtitle = list("Plot subtitle"),
+  filter_var = list("Variable used for local filtering"),
+  filter_values = list("Values restricting the available filter choices"),
+  filter_default_vals = list("Default selected values for the filter variable"),
+  receiver_id = list("ID of the module receiving patient selection events")
+)
+
+mod_spiderplot_API_spec <- TC$group(
+  module_id = TC$mod_ID(),
+  subject_level_dataset_name = TC$dataset_name() |> TC$flag("subject_level_dataset_name"),
+  results_dataset_name = TC$dataset_name(),
+  subjid_var = TC$col("subject_level_dataset_name", TC$or(TC$character(), TC$factor())) |> TC$flag("subjid_var"),
+  x_vars = TC$col("results_dataset_name", TC$or(TC$numeric(), TC$character(), TC$factor())) |>
+    TC$flag("one_or_more"),
+  y_vars = TC$col("results_dataset_name", TC$numeric()) |> TC$flag("one_or_more"),
+  color_vars = TC$col("subject_level_dataset_name") |> TC$flag("one_or_more", "optional"),
+  color_palette = TC$character() |> TC$flag("one_or_more", "optional", "named"),
+  tooltip = TC$character() |> TC$flag("one_or_more", "optional", "named"),
+  facet_rows = TC$col("subject_level_dataset_name") |> TC$flag("one_or_more", "optional"),
+  facet_cols = TC$col("subject_level_dataset_name") |> TC$flag("one_or_more", "optional"),
+  height_default = TC$numeric(min = 1) |> TC$flag("optional", "manual_check"),
+  height_range = TC$numeric(min = 1) |> TC$flag("optional", "manual_check"),
+  title = TC$character() |> TC$flag("optional"),
+  subtitle = TC$character() |> TC$flag("optional"),
+  filter_var = TC$character() |> TC$flag("optional"),
+  filter_values = TC$character() |> TC$flag("one_or_more", "optional"),
+  filter_default_vals = TC$character() |> TC$flag("one_or_more", "optional"),
+  receiver_id = TC$character() |> TC$flag("optional")
+) |> TC$attach_docs(mod_spiderplot_API_docs)
+
+check_mod_spiderplot <- function(
+    afmm, datasets, module_id, subject_level_dataset_name, results_dataset_name, subjid_var,
+    x_vars, y_vars, color_vars, color_palette, tooltip, facet_rows, facet_cols, height_default,
+    height_range, title, subtitle, filter_var, filter_values, filter_default_vals, receiver_id
+) {
+  err <- CM$container()
+
+  OK <- check_mod_spiderplot_auto(
+    afmm, datasets,
+    module_id, subject_level_dataset_name, results_dataset_name, subjid_var,
+    x_vars, y_vars, color_vars, color_palette, tooltip, facet_rows, facet_cols, height_default,
+    height_range, title, subtitle, filter_var, filter_values, filter_default_vals, receiver_id,
+    err
+  )
+
+  ok_height_default <- CM$assert(
+    container = err,
+    cond = checkmate::test_number(height_default, lower = 1, finite = TRUE, null.ok = TRUE),
+    msg = "The value assigned to `height_default` should be a single finite number greater or equal to 1."
+  )
+  ok_height_range <- CM$assert(
+    container = err,
+    cond = checkmate::test_numeric(
+      height_range, len = 2, lower = 1, finite = TRUE, any.missing = FALSE, null.ok = TRUE
+    ) && (is.null(height_range) || height_range[[1]] < height_range[[2]]),
+    msg = paste(
+      "The value assigned to `height_range` should be a numeric vector of length 2 with values greater",
+      "or equal to 1 and its first element smaller than the second one."
+    )
+  )
+  if (ok_height_default && ok_height_range) {
+    h_default <- if (is.null(height_default)) POC$HEIGHT_SVG else height_default
+    h_range <- if (is.null(height_range)) c(1, h_default * 2) else height_range
+    CM$assert(
+      container = err,
+      cond = h_range[[1]] <= h_default && h_default <= h_range[[2]],
+      msg = sprintf(
+        "The default height (%s) should fall within `height_range` [%s, %s].",
+        h_default, h_range[[1]], h_range[[2]]
+      )
+    )
+  }
+
+  ds_ok <- all(OK[c("subject_level_dataset_name", "results_dataset_name")])
+
+  if (ds_ok && isTRUE(OK[["filter_var"]]) && !is.null(filter_var)) {
+    available_cols <- union(names(datasets[[subject_level_dataset_name]]), names(datasets[[results_dataset_name]]))
+    CM$assert(
+      container = err,
+      cond = filter_var %in% available_cols,
+      msg = sprintf(
+        "The value of parameter <b>`filter_var`</b> (<b>\"%s\"</b>) should be a column of dataset <b>`%s`</b> or <b>`%s`</b>.",
+        filter_var, subject_level_dataset_name, results_dataset_name
+      )
+    )
+  }
+
+  if (isTRUE(OK[["filter_values"]]) && isTRUE(OK[["filter_default_vals"]]) &&
+        !is.null(filter_values) && !is.null(filter_default_vals)) {
+    missing_defaults <- setdiff(filter_default_vals, filter_values)
+    CM$assert(
+      container = err,
+      cond = length(missing_defaults) == 0,
+      msg = sprintf(
+        "`filter_default_vals` should be a subset of `filter_values`, but these values are not: %s.",
+        paste(sprintf('"%s"', missing_defaults), collapse = ", ")
+      )
+    )
+  }
+
+  if (ds_ok && isTRUE(OK[["tooltip"]]) && !is.null(tooltip)) {
+    joined_vars <- intersect(
+      c(color_vars, facet_rows, facet_cols, filter_var),
+      names(datasets[[subject_level_dataset_name]])
+    )
+    available_cols <- union(names(datasets[[results_dataset_name]]), joined_vars)
+    unknown_cols <- setdiff(tooltip, available_cols)
+    CM$assert(
+      container = err,
+      cond = length(unknown_cols) == 0,
+      msg = sprintf(
+        paste(
+          "The value of parameter <b>`tooltip`</b> refers to columns (<b>%s</b>) that are neither in dataset",
+          "<b>`%s`</b> nor among the `color_vars`, `facet_rows`, `facet_cols` or `filter_var` columns of",
+          "dataset <b>`%s`</b>."
+        ),
+        paste(sprintf('"%s"', unknown_cols), collapse = ", "), results_dataset_name, subject_level_dataset_name
+      )
+    )
+  }
+
+  module_names <- afmm[["module_names"]]
+  if (isTRUE(OK[["receiver_id"]]) && !is.null(receiver_id) && !is.null(module_names)) {
+    other_ids <- setdiff(names(module_names), module_id)
+    CM$assert(
+      container = err,
+      cond = receiver_id %in% names(module_names),
+      msg = sprintf(
+        "`receiver_id` (\"%s\") does not refer to any module in the app. %s",
+        receiver_id,
+        if (length(other_ids) == 0) {
+          "No other modules are available."
+        } else {
+          sprintf("Available module IDs: %s.", paste(sprintf('"%s"', other_ids), collapse = ", "))
+        }
+      )
+    )
+  }
+
+  res <- err[["messages"]]
+  return(res)
 }
